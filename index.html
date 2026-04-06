@@ -76,14 +76,20 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            /* 添加 webkit 前缀 */
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+
             border-radius: 32px;
             padding: 40px;
-            /* border: 1px solid rgba(255, 255, 255, 0.1); */
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             overflow: hidden;
+
+            /* 强制开启硬件加速 */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         /* 卡片正面 */
@@ -92,7 +98,11 @@
             background-size: cover;
             background-position: center;
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            /* 使用内阴影代替边框 */
+
+            /* 解决手机端透视 Bug */
+            -webkit-transform: translateZ(1px);
+            transform: translateZ(1px);
+            z-index: 2;
         }
 
         .card-front::after {
@@ -105,10 +115,13 @@
         /* 卡片背面 */
         .card-back {
             background: #1c1c1e;
-            transform: rotateY(180deg);
             justify-content: center;
             border: 1px solid var(--fplayer-green);
-            /* 背面保留绿色边框 */
+
+            /* 修改这里：旋转的同时也拉开 1px 距离 */
+            -webkit-transform: rotateY(180deg) translateZ(1px);
+            transform: rotateY(180deg) translateZ(1px);
+            z-index: 1;
         }
 
         .pixel-border {
