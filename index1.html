@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPlayer - 跨平台局域网流媒体大师</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --apple-blue: #0071e3;
+            --fplayer-green: #a3e635;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(180deg, #fff 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: #121212;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(163, 230, 53, 0.3);
+        }
+
+        .pixel-border {
+            image-rendering: pixelated;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 980px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: var(--fplayer-green);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="glass-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <span class="text-xl font-bold tracking-tighter text-white">FPlayer</span>
+                <div class="hidden md:flex space-x-6 text-xs font-light text-gray-400">
+                    <a href="#features" class="hover:text-white transition">功能</a>
+                    <a href="#tech" class="hover:text-white transition">技术栈</a>
+                    <a href="#architecture" class="hover:text-white transition">架构</a>
+                    <a href="#scenarios" class="hover:text-white transition">应用场景</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com/your-repo/fplayer" target="_blank"
+                    class="text-xs text-gray-400 hover:text-white transition">GitHub</a>
+                <a href="#" class="btn-primary text-xs">立即下载</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4 hero-gradient">
+        <div data-aos="zoom-out" data-aos-duration="1500" class="mb-8">
+            <!-- 替换为你的 FPlayer 像素猫 Logo -->
+            <img src="./doc/img/icons/LOGO_ICON_CUTED.svg" alt="FPlayer Logo"
+                class="w-32 md:w-48 pixel-border mx-auto drop-shadow-[0_0_30px_rgba(163,230,53,0.2)]">
+        </div>
+        <h1 class="text-5xl md:text-8xl font-extrabold mb-6 text-gradient tracking-tight" data-aos="fade-up">
+            FPlayer
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl font-light leading-relaxed" data-aos="fade-up"
+            data-aos-delay="200">
+            跨平台局域网多输入源流媒体播放系统。<br>
+            <span class="text-white font-normal">采集、编码、推流、拉流，一气呵成。</span>
+        </p>
+        <div class="flex space-x-6" data-aos="fade-up" data-aos-delay="400">
+            <a href="https://github.com" class="text-blue-500 text-lg hover:underline underline-offset-8 font-light">查看
+                GitHub 源码 ></a>
+            <a href="#features" class="text-blue-500 text-lg hover:underline underline-offset-8 font-light">了解功能细节 ></a>
+        </div>
+    </section>
+
+    <!-- 功能矩阵 (Bento Grid) -->
+    <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-bold mb-20 text-center" data-aos="fade-up">全能，不只是一点。</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- 采集 -->
+            <div class="bento-card p-10 md:col-span-2 flex flex-col justify-between" data-aos="fade-up">
+                <div>
+                    <h3 class="text-3xl font-bold mb-4">全维度采集</h3>
+                    <p class="text-gray-400 text-lg">支持本地音视频、摄像头（物理/虚拟）、麦克风以及屏幕共享。你所见的，皆可流转。</p>
+                </div>
+                <div class="mt-8 flex gap-4">
+                    <span class="px-3 py-1 bg-zinc-800 rounded text-xs text-green-400">4K 屏幕共享</span>
+                    <span class="px-3 py-1 bg-zinc-800 rounded text-xs text-blue-400">虚拟摄像头</span>
+                </div>
+            </div>
+            <!-- 跨平台 -->
+            <div class="bento-card p-10 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-3xl font-bold mb-4">跨平台支持</h3>
+                <p class="text-gray-400">桌面端全能推拉流，安卓端极致拉流体验。局域网内的无缝协作。</p>
+                <div class="text-5xl mt-6">💻 📱</div>
+            </div>
+            <!-- 性能 -->
+            <div class="bento-card p-10 flex flex-col justify-between" data-aos="fade-up">
+                <h3 class="text-3xl font-bold mb-4">核心驱动</h3>
+                <p class="text-gray-400 text-sm">内置高性能解码器，支持软解/硬解动态切换，极致优化 CPU 与内存占用。</p>
+            </div>
+            <!-- 拓展 -->
+            <div class="bento-card p-10 md:col-span-2 bg-gradient-to-br from-zinc-900 to-black" data-aos="fade-up"
+                data-aos-delay="100">
+                <h3 class="text-3xl font-bold mb-4">截图与录制</h3>
+                <p class="text-gray-400">不仅是播放。内置图池管理，支持大模型智能识别、标注与内容复制，让流媒体拥有灵魂。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术栈展示 -->
+    <section id="tech" class="py-32 bg-zinc-950">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16" data-aos="fade-up">工业级技术底座</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12" data-aos="fade-up">
+                <div>
+                    <div class="text-4xl font-bold text-white mb-2">C++ 17</div>
+                    <div class="text-gray-500 text-sm">高性能核心</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white mb-2">Qt 6.10</div>
+                    <div class="text-gray-500 text-sm">现代化 UI 框架</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white mb-2">FFmpeg</div>
+                    <div class="text-gray-500 text-sm">全能编解码</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white mb-2">WebRTC</div>
+                    <div class="text-gray-500 text-sm">超低延迟传输</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 架构说明 -->
+    <section id="architecture" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-5xl font-bold mb-8">分层架构。<br>稳如磐石。</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 shrink-0">
+                            1</div>
+                        <p class="text-gray-300"><span class="font-bold text-white">App / Widget 层：</span>基于 Qt
+                            构建的高级交互逻辑与 UI 展现。</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-500 shrink-0">
+                            2</div>
+                        <p class="text-gray-300"><span class="font-bold text-white">Service / Runtime
+                                层：</span>工厂职责，动态管理音视频与网络核心模块。</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-500 shrink-0">
+                            3</div>
+                        <p class="text-gray-300"><span class="font-bold text-white">Backend / API 层：</span>极致解耦。支持
+                            WebRTC、FFmpeg 多后端切换。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-zinc-900 p-8 rounded-3xl border border-white/5 shadow-2xl" data-aos="flip-left">
+                <pre class="text-xs text-green-500 font-mono leading-relaxed">
+app → widget → service
+  ↓
+runtime (Factory)
+  ↓
+backend (Qt / FFmpeg / WebRTC)
+  ↓
+API (Interfaces)
+  ↓
+Common Utilities
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section id="scenarios" class="py-32 px-6 bg-zinc-950">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-bold mb-20 text-center" data-aos="fade-up">从实验室到工业现场。</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-8 border-l border-zinc-800" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-3xl mb-4">🏫</div>
+                    <h4 class="text-xl font-bold mb-2">智慧教育</h4>
+                    <p class="text-gray-500 text-sm">教室局域网内的跨机器摄像头演示与屏幕共享。</p>
+                </div>
+                <div class="p-8 border-l border-zinc-800" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-3xl mb-4">🏥</div>
+                    <h4 class="text-xl font-bold mb-2">医疗影像</h4>
+                    <p class="text-gray-500 text-sm">集成特定 SDK，实现超声内镜放射影像的实时采集。</p>
+                </div>
+                <div class="p-8 border-l border-zinc-800" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-3xl mb-4">🏭</div>
+                    <h4 class="text-xl font-bold mb-2">工业监控</h4>
+                    <p class="text-gray-500 text-sm">车间环境下的低延迟多路摄像头监控系统。</p>
+                </div>
+                <div class="p-8 border-l border-zinc-800" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-3xl mb-4">🚀</div>
+                    <h4 class="text-xl font-bold mb-2">国产化适配</h4>
+                    <p class="text-gray-500 text-sm">顺应国产化趋势，提供跨操作系统的高效流媒体方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部下载 -->
+    <section class="py-40 text-center px-4">
+        <h2 class="text-5xl md:text-7xl font-bold mb-10 text-gradient" data-aos="fade-up">立即开启高效流转。</h2>
+        <p class="text-gray-400 mb-12 text-lg" data-aos="fade-up">开源、自由、强大。满足你对局域网流媒体的所有想象。</p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6" data-aos="fade-up"
+            data-aos-delay="200">
+            <a href="#" class="btn-primary px-12 py-5 text-xl">下载 FPlayer Pro</a>
+            <a href="https://github.com" class="text-blue-500 text-xl hover:underline underline-offset-8">在 GitHub 上贡献
+                ></a>
+        </div>
+    </section>
+
+    <footer class="py-10 border-t border-white/5 text-center text-gray-600 text-xs px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2026 FPlayer Project. 基于 C++17 与 Qt 6 构建。</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition">隐私政策</a>
+                <a href="#" class="hover:text-white transition">文档说明</a>
+                <a href="#" class="hover:text-white transition">更新日志</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true
+        });
+    </script>
+</body>
+
+</html>
