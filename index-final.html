@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPlayer - 跨平台局域网流媒体大师</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FPlayer - 跨平台局域网流媒体大师</title>
+
+        <!-- 1. 设置浏览器标签页图标 (SVG) -->
+        <link rel="icon" type="image/svg+xml" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
+
+        <!-- 2. 针对 iOS 设备的桌面快捷方式图标 -->
+        <link rel="apple-touch-icon" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
+
+        <!-- 其他原有的 script 和 link... -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        ...
+    </head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --apple-blue: #0071e3;
+            --fplayer-green: #a3e635;
+            --apple-ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #000;
+            color: #fff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏毛玻璃 */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 苹果风渐变文字 */
+        .text-gradient {
+            background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 3D 翻转卡片核心样式 */
+        .scene-container {
+            perspective: 1200px;
+        }
+
+        .scene-card {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.8s var(--apple-ease), box-shadow 0.5s ease;
+        }
+
+        .scene-card.is-flipped {
+            transform: rotateY(180deg) scale(1.02);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+
+        /* 卡片正面 */
+        .card-front {
+            background: #121212;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-front::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        /* 卡片背面 */
+        .card-back {
+            background: #1c1c1e;
+            transform: rotateY(180deg);
+            justify-content: center;
+            border-color: var(--fplayer-green);
+        }
+
+        .pixel-border {
+            image-rendering: pixelated;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            padding: 12px 26px;
+            border-radius: 980px;
+            font-weight: 600;
+            transition: all 0.3s var(--apple-ease);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: var(--fplayer-green);
+        }
+
+        /* 呼吸灯动画 */
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        .animate-pulse-soft {
+            animation: pulse-soft 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="glass-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <span class="text-xl font-bold tracking-tighter text-white">FPlayer</span>
+                <div class="hidden md:flex space-x-8 text-[12px] font-light text-gray-400">
+                    <a href="#features" class="hover:text-white transition uppercase tracking-widest">功能</a>
+                    <a href="#scenarios" class="hover:text-white transition uppercase tracking-widest">应用场景</a>
+                    <a href="#tech" class="hover:text-white transition uppercase tracking-widest">技术架构</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="https://github.com/chunyujin295/FPlayer-desketop"
+                    class="text-xs text-gray-400 hover:text-white transition">GitHub</a>
+                <a href="#" class="btn-primary text-xs">立即获取</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1a1a1a_0%,#000_100%)]"></div>
+
+        <div data-aos="zoom-out" data-aos-duration="2000" class="relative z-10 mb-10">
+            <img src="./doc/img/icons/LOGO_ICON_CUTED.svg" alt="FPlayer Logo"
+                class="w-40 md:w-56 pixel-border mx-auto drop-shadow-[0_0_50px_rgba(163,230,53,0.4)] animate-pulse-soft">
+        </div>
+
+        <h1 class="relative z-10 text-6xl md:text-9xl font-extrabold mb-6 text-gradient tracking-tighter"
+            data-aos="fade-up">
+            FPlayer
+        </h1>
+        <p class="relative z-10 text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl font-light" data-aos="fade-up"
+            data-aos-delay="200">
+            跨平台局域网多输入源流媒体系统。<br>
+            <span class="text-white">采集、编码、推流、拉流，如丝般顺滑。</span>
+        </p>
+
+        <div class="relative z-10 flex space-x-8" data-aos="fade-up" data-aos-delay="400">
+            <a href="#scenarios" class="text-blue-500 text-lg hover:underline underline-offset-8">观看场景演示 ></a>
+            <a href="#tech" class="text-gray-400 text-lg hover:text-white transition">技术规格 ></a>
+        </div>
+    </section>
+
+    <!-- 应用场景 (3D 翻转矩阵) -->
+    <section id="scenarios" class="py-32 px-6 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight" data-aos="fade-up">在任何屏幕，<br>大显身手。</h2>
+                <p class="text-gray-500 text-lg" data-aos="fade-up">点击卡片，探索 FPlayer 在专业领域的深度表现。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 场景 1: 工业监控 -->
+                <div class="scene-container" data-aos="fade-up">
+                    <div class="scene-card" onclick="this.classList.toggle('is-flipped')">
+                        <div class="card-face card-front"
+                            style="background-image: url('./doc/img/icons/industrial_bg.jpg')">
+                            <div class="relative z-10">
+                                <span
+                                    class="bg-white/10 backdrop-blur px-3 py-1 rounded-full text-[10px] uppercase tracking-widest mb-4 inline-block">Industrial
+                                    4.0</span>
+                                <h3 class="text-3xl font-bold">工业实时视觉监控</h3>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3 class="text-2xl font-bold mb-4 text-green-400">毫秒级工业响应</h3>
+                            <p class="text-gray-400 leading-relaxed mb-6">
+                                针对车间局域网优化，实现跨机器摄像头演示。支持主流工业摄像机协议，为生产线提供高稳定性、低延迟的监控底座。</p>
+                            <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+                                <div>
+                                    <div class="text-xl font-bold">SDK</div>
+                                    <div class="text-xs text-gray-500 text-nowrap">特定设备集成适配</div>
+                                </div>
+                                <div>
+                                    <div class="text-xl font-bold">Low Latency</div>
+                                    <div class="text-xs text-gray-500">毫秒级推拉流</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 场景 2: 医疗影像 -->
+                <div class="scene-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="scene-card" onclick="this.classList.toggle('is-flipped')">
+                        <div class="card-face card-front"
+                            style="background-image: url('./doc/img/icons/medical_bg.jpg')">
+                            <div class="relative z-10">
+                                <span
+                                    class="bg-white/10 backdrop-blur px-3 py-1 rounded-full text-[10px] uppercase tracking-widest mb-4 inline-block">Medical
+                                    Precision</span>
+                                <h3 class="text-3xl font-bold">医疗影像采集教学</h3>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3 class="text-2xl font-bold mb-4 text-blue-400">高保真影像流转</h3>
+                            <p class="text-gray-400 leading-relaxed mb-6">
+                                适用于手术室示教系统。支持超声、内镜等影像的实时采集与广播。支持本地录制与大模型标注，为医疗科研提供精准数据支撑。</p>
+                            <div class="text-sm space-y-2">
+                                <div class="flex items-center gap-2 text-gray-300">✓ 支持特定影像设备解析</div>
+                                <div class="flex items-center gap-2 text-gray-300">✓ 4K 60fps 原始画质</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 场景 3: 智慧教育 -->
+                <div class="scene-container" data-aos="fade-up">
+                    <div class="scene-card" onclick="this.classList.toggle('is-flipped')">
+                        <div class="card-face card-front bg-gradient-to-br from-zinc-800 to-black">
+                            <div class="relative z-10">
+                                <div class="text-5xl mb-6">🏫</div>
+                                <h3 class="text-3xl font-bold">教育实验室共享</h3>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3 class="text-2xl font-bold mb-4 text-purple-400">打破地理限制</h3>
+                            <p class="text-gray-400 leading-relaxed mb-6">在局域网内无限制分发实验演示视频。教师端采集屏幕或摄像头，一键推流至全班终端。流畅度高达
+                                120fps，满足精细实验展示。</p>
+                            <div class="bg-white/5 p-4 rounded-2xl">
+                                <div class="text-sm italic">“即使在复杂的实验室网络环境下，推拉流依然稳定如初。”</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 场景 4: 国产化适配 -->
+                <div class="scene-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="scene-card" onclick="this.classList.toggle('is-flipped')">
+                        <div class="card-face card-front bg-gradient-to-br from-blue-900/40 to-black">
+                            <div class="relative z-10">
+                                <div class="text-5xl mb-6">🚀</div>
+                                <h3 class="text-3xl font-bold">国产化办公环境</h3>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3 class="text-2xl font-bold mb-4 text-white">跨平台，统一架构</h3>
+                            <p class="text-gray-400 leading-relaxed mb-6">顺应国产化浪潮，全面支持国产操作系统。基于 C++17
+                                分层设计，后端插件化。无论底层平台如何变化，都能提供统一的高质量体验。</p>
+                            <div class="flex gap-4">
+                                <div class="px-3 py-1 border border-white/20 rounded text-[10px]">桌面端 / 移动端</div>
+                                <div class="px-3 py-1 border border-white/20 rounded text-[10px]">全分层解耦</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性展示 (Bento Grid) -->
+    <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-zinc-900 rounded-[32px] p-12 md:col-span-2 overflow-hidden relative group"
+                data-aos="fade-up">
+                <div class="relative z-10">
+                    <h3 class="text-4xl font-bold mb-6 text-gradient">全维度采集</h3>
+                    <p class="text-gray-400 text-lg max-w-md">支持本地视频、摄像头（物理/虚拟）、麦克风及屏幕共享。视野所及，皆可分发。</p>
+                </div>
+                <img src="./doc/img/icons/desktop_ui.png"
+                    class="absolute -right-20 -bottom-20 w-3/4 opacity-40 group-hover:opacity-100 group-hover:-translate-y-4 transition-all duration-700"
+                    alt="UI">
+            </div>
+            <div class="bg-zinc-900 rounded-[32px] p-12 flex flex-col justify-between border border-white/5"
+                data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-3xl font-bold">核心驱动</h3>
+                <p class="text-gray-400 text-sm">内置高性能编解码器，支持软解/硬解动态切换。极致优化 CPU 与内存占用。</p>
+                <div class="text-6xl font-bold text-green-500 opacity-20">FFmpeg</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 架构展示 -->
+    <section id="tech" class="py-32 bg-black border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-5xl font-bold mb-8 tracking-tighter">分层解耦，<br>稳如磐石。</h2>
+                <div class="space-y-6">
+                    <p class="text-gray-400">只有 Runtime 认识所有 Backend，实现工厂职责的完美闭环。API 抽象层统一接口，让维护与扩展变得前所未有的简单。</p>
+                    <div class="flex items-center gap-4 text-xs tracking-widest text-gray-500 uppercase font-bold">
+                        <span>C++ 17</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Qt 6.10</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>WebRTC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-zinc-950 p-10 rounded-[32px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)]"
+                data-aos="flip-left">
+                <pre class="text-xs text-green-500/80 font-mono leading-loose">
+<span class="text-white">// 架构说明书</span>
+app → widget → service
+  ↓
+runtime (Factory / Assembly)
+  ↓
+backend (Qt / FFmpeg / WebRTC)
+  ↓
+API (Interfaces)
+  ↓
+Common Utilities / Tools
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <section class="py-40 text-center px-4 bg-gradient-to-b from-black to-[#050505]">
+        <h2 class="text-5xl md:text-8xl font-extrabold mb-12 tracking-tighter" data-aos="fade-up">重新想象<br>流媒体。</h2>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6" data-aos="fade-up"
+            data-aos-delay="200">
+            <a href="https://github.com/chunyujin295/FPlayer-desketop/releases"
+                class="btn-primary px-12 py-5 text-xl">免费下载</a>
+            <a href="https://github.com/chunyujin295/FPlayer-desketop"
+                class="text-blue-500 text-xl hover:underline underline-offset-8">获取 GitHub 源码
+                ></a>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 text-center text-gray-600 text-[10px] uppercase tracking-widest">
+        <p>© 2026 FPlayer Project. Powered by C++17 & Qt 6.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true
+        });
+
+        // 禁止卡片在点击链接时翻转 (如果卡片内有链接)
+        document.querySelectorAll('.scene-card a').forEach(link => {
+            link.addEventListener('click', (e) => e.stopPropagation());
+        });
+    </script>
+</body>
+
+</html>
