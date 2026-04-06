@@ -327,22 +327,60 @@
     <!-- 特性展示 (Bento Grid) -->
     <section id="features" class="py-32 px-6 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-zinc-900 rounded-[32px] p-12 md:col-span-2 overflow-hidden relative group"
+
+            <!-- 左侧大卡片：全维度采集 -->
+            <div class="bg-zinc-900 rounded-[40px] p-12 md:col-span-2 overflow-hidden relative group"
                 data-aos="fade-up">
-                <div class="relative z-10">
+
+                <!-- 文字层级置顶 -->
+                <div class="relative z-20">
                     <h3 class="text-4xl font-bold mb-6 text-gradient">全维度采集</h3>
-                    <p class="text-gray-400 text-lg max-w-md">支持本地视频、摄像头（物理/虚拟）、麦克风及屏幕共享。视野所及，皆可分发。</p>
+                    <p class="text-gray-400 text-lg max-w-sm leading-relaxed">
+                        支持本地视频、摄像头、麦克风及屏幕共享。<br>
+                        <span class="text-white/40 italic text-sm font-light tracking-wider">视野所及，皆可分发。</span>
+                    </p>
                 </div>
-                <img src="./doc/img/pictures/cut.png"
-                    class="absolute -right-20 -bottom-20 w-3/4 opacity-40 group-hover:opacity-100 group-hover:-translate-y-4 transition-all duration-700"
-                    alt="UI">
+
+                <!-- 图片容器：调整了 w-[55%] 缩小图片，并优化了定位 -->
+                <div class="absolute right-4 -bottom-8 w-[50%] z-10 transition-all duration-1000 cubic-bezier(0.4, 0, 0.2, 1) 
+                        group-hover:-translate-y-4 group-hover:-translate-x-4 group-hover:scale-[1.02]">
+
+                    <!-- 图片本体：增加深色内阴影和边框感 -->
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10">
+                        <img src="./doc/img/pictures/cut.png" alt="FPlayer UI"
+                            class="w-full h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-1000">
+
+                        <!-- 给图片盖一层微弱的渐变，让它更自然地融入黑色背景 -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-zinc-900 rounded-[32px] p-12 flex flex-col justify-between border border-white/5"
+
+            <!-- 右侧小卡片：核心驱动 (保持比例一致) -->
+            <div class="bg-zinc-900 rounded-[40px] p-12 flex flex-col justify-between border border-white/5 relative overflow-hidden group"
                 data-aos="fade-up" data-aos-delay="100">
-                <h3 class="text-3xl font-bold">核心驱动</h3>
-                <p class="text-gray-400 text-sm">内置高性能编解码器，支持软解/硬解动态切换。极致优化 CPU 与内存占用。</p>
-                <div class="text-6xl font-bold text-green-500 opacity-20">FFmpeg</div>
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-bold mb-4 tracking-tight">核心驱动</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        基于 C++17 构建。内置高性能编解码器，支持软解/硬解动态切换。极致优化 CPU 占用。
+                    </p>
+                </div>
+
+                <div class="relative z-10">
+                    <span
+                        class="text-4xl font-extrabold text-green-500/20 group-hover:text-green-500/50 transition-all duration-700 tracking-tighter">FFmpeg</span>
+                </div>
+
+                <!-- 背景装饰图标 -->
+                <div
+                    class="absolute -right-4 -bottom-4 text-8xl text-white/5 font-black italic select-none group-hover:text-white/10 transition-colors duration-700">
+                    QT6
+                </div>
             </div>
+
         </div>
     </section>
 
