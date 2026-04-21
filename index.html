@@ -160,6 +160,167 @@
         .animate-pulse-soft {
             animation: pulse-soft 4s infinite ease-in-out;
         }
+
+        .demo-glow-frame {
+            position: relative;
+            background: rgba(24, 24, 27, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.55);
+            transition: transform 0.35s var(--apple-ease), border-color 0.35s var(--apple-ease), box-shadow 0.35s var(--apple-ease);
+        }
+
+        .demo-glow-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 28%);
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .demo-glow-frame:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 64px rgba(0, 0, 0, 0.62);
+        }
+
+        .demo-zoomable {
+            cursor: zoom-in;
+        }
+
+        .demo-thumbnail {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.82;
+            transition: opacity 0.3s var(--apple-ease), transform 0.3s var(--apple-ease), border-color 0.3s var(--apple-ease);
+        }
+
+        .demo-thumbnail:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+
+        .demo-thumbnail.is-active {
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.34);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+        }
+
+        .image-lightbox {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.86);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s var(--apple-ease), visibility 0.28s var(--apple-ease);
+            z-index: 100;
+        }
+
+        .image-lightbox.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .image-lightbox-content {
+            position: relative;
+            width: min(94vw, 1280px);
+            max-height: 88vh;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 32px 84px rgba(0, 0, 0, 0.85);
+            transform: scale(0.97);
+            transition: transform 0.28s var(--apple-ease);
+        }
+
+        .image-lightbox.is-open .image-lightbox-content {
+            transform: scale(1);
+        }
+
+        .image-lightbox img {
+            width: 100%;
+            height: auto;
+            max-height: 88vh;
+            display: block;
+            object-fit: contain;
+            background: #050505;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: rgba(0, 0, 0, 0.48);
+            color: #fff;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .lightbox-nav-prev {
+            left: 12px;
+        }
+
+        .lightbox-nav-next {
+            right: 12px;
+        }
+
+        .lightbox-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .lightbox-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            border: 0;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            transition: all 0.25s var(--apple-ease);
+        }
+
+        .lightbox-dot.is-active {
+            width: 22px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+        }
     </style>
 </head>
 
@@ -177,7 +338,7 @@
                 </div>
             </div>
             <div class="flex items-center space-x-6">
-                <a href="https://github.com/chunyujin295/FPlayer-desketop"
+                <a href="https://github.com/ff-283/fplayer-ff-desktop"
                     class="text-xs text-gray-400 hover:text-white transition">GitHub</a>
                 <a href="#" class="btn-primary text-xs">立即获取</a>
             </div>
@@ -382,6 +543,49 @@
             </div>
 
         </div>
+
+        <div class="mt-16 bg-zinc-900/70 rounded-[40px] p-8 md:p-12 border border-white/10" data-aos="fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">产品实机演示</h3>
+                    <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+                        覆盖采集端、推流端与播放端的完整链路，展示 FPlayer 在复杂局域网环境中的稳定性与实时性表现。
+                    </p>
+                    <div class="space-y-3 text-sm text-gray-300">
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+                            多输入源统一编排，快速切换推流通道
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+                            端到端低延迟链路，画面与操作同步
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+                            支持实机演示录制，便于复盘与培训
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-4">
+                    <div class="demo-glow-frame rounded-3xl overflow-hidden w-full">
+                        <img id="demo-main-image" src="./doc/img/pictures/product_demo_board.png" alt="FPlayer 产品实机演示主画面"
+                            class="w-full h-auto block demo-zoomable transition-transform duration-500 hover:scale-[1.01]">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="rounded-2xl overflow-hidden demo-thumbnail is-active" data-demo-thumb data-demo-index="0">
+                            <img src="./doc/img/pictures/product_demo_board.png" alt="FPlayer 实机演示缩略图 1"
+                                class="w-full h-auto block">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden demo-thumbnail" data-demo-thumb data-demo-index="1">
+                            <img src="./doc/img/pictures/product_demo_board_2.png" alt="FPlayer 实机演示缩略图 2"
+                                class="w-full h-auto block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- 架构展示 -->
@@ -423,9 +627,9 @@ Common Utilities / Tools
         <h2 class="text-5xl md:text-8xl font-extrabold mb-12 tracking-tighter" data-aos="fade-up">重新想象<br>流媒体。</h2>
         <div class="flex flex-col md:flex-row justify-center items-center gap-6" data-aos="fade-up"
             data-aos-delay="200">
-            <a href="https://github.com/chunyujin295/FPlayer-desketop/releases"
+            <a href="https://github.com/ff-283/fplayer-ff-desktop/releases"
                 class="btn-primary px-12 py-5 text-xl">免费下载</a>
-            <a href="https://github.com/chunyujin295/FPlayer-desketop"
+            <a href="https://github.com/ff-283/fplayer-ff-desktop"
                 class="text-blue-500 text-xl hover:underline underline-offset-8">获取 GitHub 源码
                 ></a>
         </div>
@@ -434,6 +638,16 @@ Common Utilities / Tools
     <footer class="py-12 border-t border-white/5 text-center text-gray-600 text-[10px] uppercase tracking-widest">
         <p>© 2026 FPlayer Project. Powered by C++17 & Qt 6.</p>
     </footer>
+
+    <div id="image-lightbox" class="image-lightbox" aria-hidden="true">
+        <div class="image-lightbox-content">
+            <button id="lightbox-prev-btn" class="lightbox-nav-btn lightbox-nav-prev" aria-label="查看上一张">‹</button>
+            <button id="lightbox-next-btn" class="lightbox-nav-btn lightbox-nav-next" aria-label="查看下一张">›</button>
+            <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="关闭放大预览">×</button>
+            <img id="lightbox-preview-image" src="" alt="放大预览图">
+            <div id="lightbox-dots" class="lightbox-dots"></div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -446,6 +660,115 @@ Common Utilities / Tools
         // 禁止卡片在点击链接时翻转 (如果卡片内有链接)
         document.querySelectorAll('.scene-card a').forEach(link => {
             link.addEventListener('click', (e) => e.stopPropagation());
+        });
+
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImage = document.getElementById('lightbox-preview-image');
+        const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+        const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+        const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+        const lightboxDots = document.getElementById('lightbox-dots');
+        const mainDemoImage = document.getElementById('demo-main-image');
+        const demoThumbs = document.querySelectorAll('[data-demo-thumb]');
+        const demoGallery = [
+            {
+                src: './doc/img/pictures/product_demo_board.png',
+                alt: 'FPlayer 产品实机演示主画面'
+            },
+            {
+                src: './doc/img/pictures/product_demo_board_2.png',
+                alt: 'FPlayer 产品实机演示主画面 2'
+            }
+        ];
+        let currentImageIndex = 0;
+
+        function setMainDemoImage(index) {
+            const target = demoGallery[index];
+            if (!target) return;
+            currentImageIndex = index;
+            mainDemoImage.src = target.src;
+            mainDemoImage.alt = target.alt;
+            demoThumbs.forEach((thumb) => {
+                const thumbIndex = Number(thumb.dataset.demoIndex);
+                thumb.classList.toggle('is-active', thumbIndex === currentImageIndex);
+            });
+        }
+
+        function updateDots() {
+            const dots = lightboxDots.querySelectorAll('.lightbox-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('is-active', index === currentImageIndex);
+            });
+        }
+
+        function buildDots() {
+            lightboxDots.innerHTML = '';
+            demoGallery.forEach((_, index) => {
+                const dotBtn = document.createElement('button');
+                dotBtn.className = 'lightbox-dot';
+                dotBtn.type = 'button';
+                dotBtn.setAttribute('aria-label', `查看第 ${index + 1} 张`);
+                dotBtn.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    renderLightboxImage(currentImageIndex);
+                });
+                lightboxDots.appendChild(dotBtn);
+            });
+            updateDots();
+        }
+
+        function renderLightboxImage(index) {
+            const target = demoGallery[index];
+            if (!target) return;
+            lightboxImage.src = target.src;
+            lightboxImage.alt = target.alt || '放大预览图';
+            updateDots();
+        }
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            renderLightboxImage(currentImageIndex);
+            lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxImage.src = '';
+            document.body.style.overflow = '';
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + demoGallery.length) % demoGallery.length;
+            renderLightboxImage(currentImageIndex);
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % demoGallery.length;
+            renderLightboxImage(currentImageIndex);
+        }
+
+        demoThumbs.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                setMainDemoImage(Number(thumb.dataset.demoIndex));
+            });
+        });
+        mainDemoImage.addEventListener('click', () => openLightbox(currentImageIndex));
+
+        setMainDemoImage(0);
+        buildDots();
+        lightboxPrevBtn.addEventListener('click', showPrevImage);
+        lightboxNextBtn.addEventListener('click', showNextImage);
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+            if (e.key === 'ArrowLeft' && lightbox.classList.contains('is-open')) showPrevImage();
+            if (e.key === 'ArrowRight' && lightbox.classList.contains('is-open')) showNextImage();
         });
     </script>
 </body>
