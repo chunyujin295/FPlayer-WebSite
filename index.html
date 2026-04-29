@@ -5,22 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FPlayer - 跨平台局域网流媒体大师</title>
+    <meta name="description" content="FPlayer 是面向局域网的三端协同流媒体系统：Desktop 采集推流，Service 编排分发，Mobile 轻量播放。支持 HLS、HTTP-FLV、RTMP。">
+    <meta property="og:title" content="FPlayer - 三端协同局域网流媒体系统">
+    <meta property="og:description" content="Desktop + Service + Mobile 一体化协同，覆盖采集、编排、分发与播放全链路。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./doc/img/pictures/product_demo_board.png">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FPlayer - 跨平台局域网流媒体大师</title>
-
-        <!-- 1. 设置浏览器标签页图标 (SVG) -->
-        <link rel="icon" type="image/svg+xml" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
-
-        <!-- 2. 针对 iOS 设备的桌面快捷方式图标 -->
-        <link rel="apple-touch-icon" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
-
-        <!-- 其他原有的 script 和 link... -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        ...
-    </head>
+    <link rel="icon" type="image/svg+xml" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
+    <link rel="apple-touch-icon" href="./doc/img/icons/LOGO_ICON_CUTED.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -47,9 +40,18 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .nav-link {
+            transition: color 0.25s var(--apple-ease);
+        }
+
+        .nav-link.is-active {
+            color: #fff;
+        }
+
         /* 苹果风渐变文字 */
         .text-gradient {
             background: linear-gradient(180deg, #fff 0%, #a1a1a6 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -332,15 +334,17 @@
             <div class="flex items-center space-x-12">
                 <span class="text-xl font-bold tracking-tighter text-white">FPlayer</span>
                 <div class="hidden md:flex space-x-8 text-[12px] font-light text-gray-400">
-                    <a href="#features" class="hover:text-white transition uppercase tracking-widest">功能</a>
-                    <a href="#scenarios" class="hover:text-white transition uppercase tracking-widest">应用场景</a>
-                    <a href="#tech" class="hover:text-white transition uppercase tracking-widest">技术架构</a>
+                    <a href="#features" class="nav-link hover:text-white uppercase tracking-widest">功能</a>
+                    <a href="#demo" class="nav-link hover:text-white uppercase tracking-widest">实机演示</a>
+                    <a href="#projects" class="nav-link hover:text-white uppercase tracking-widest">项目介绍</a>
+                    <a href="#scenarios" class="nav-link hover:text-white uppercase tracking-widest">应用场景</a>
+                    <a href="#tech" class="nav-link hover:text-white uppercase tracking-widest">技术架构</a>
                 </div>
             </div>
             <div class="flex items-center space-x-6">
-                <a href="https://github.com/ff-283/fplayer-ff-desktop"
+                <a href="https://github.com/ff-283"
                     class="text-xs text-gray-400 hover:text-white transition">GitHub</a>
-                <a href="#" class="btn-primary text-xs">立即获取</a>
+                <a href="https://github.com/ff-283/fplayer-ff-desktop/releases" class="btn-primary text-xs">下载 Desktop</a>
             </div>
         </div>
     </nav>
@@ -360,13 +364,13 @@
         </h1>
         <p class="relative z-10 text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl font-light" data-aos="fade-up"
             data-aos-delay="200">
-            跨平台局域网多输入源流媒体系统。<br>
-            <span class="text-white">采集、编码、推流、拉流，如丝般顺滑。</span>
+            面向局域网的三端协同流媒体系统。<br>
+            <span class="text-white">Desktop 采集推流，Service 编排分发，Mobile 轻量播放。</span>
         </p>
 
         <div class="relative z-10 flex space-x-8" data-aos="fade-up" data-aos-delay="400">
-            <a href="#scenarios" class="text-blue-500 text-lg hover:underline underline-offset-8">观看场景演示 ></a>
-            <a href="#tech" class="text-gray-400 text-lg hover:text-white transition">技术规格 ></a>
+            <a href="https://github.com/ff-283/fplayer-ff-desktop/releases" class="text-blue-500 text-lg hover:underline underline-offset-8">下载 Desktop ></a>
+            <a href="https://github.com/ff-283" class="text-gray-300 text-lg hover:text-white transition">查看三端源码 ></a>
         </div>
     </section>
 
@@ -394,7 +398,7 @@
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-green-400">毫秒级工业响应</h3>
                             <p class="text-gray-400 leading-relaxed mb-6">
-                                针对车间局域网优化，实现跨机器摄像头演示。支持主流工业摄像机协议，为生产线提供高稳定性、低延迟的监控底座。</p>
+                                针对复杂局域网环境优化，Desktop 可进行多机位采集与组合推流，Service 统一编排播放地址，为生产监控提供稳定、低延迟的链路基础。</p>
                             <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
                                 <div>
                                     <div class="text-xl font-bold">SDK</div>
@@ -424,7 +428,7 @@
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-blue-400">高保真影像流转</h3>
                             <p class="text-gray-400 leading-relaxed mb-6">
-                                适用于手术室示教系统。支持超声、内镜等影像的实时采集与广播。支持本地录制与大模型标注，为医疗科研提供精准数据支撑。</p>
+                                适用于手术室示教系统。Desktop 端可采集多路影像并实时推流，Service 提供统一会话解析，Mobile 在病区终端快速拉流回看。</p>
                             <div class="text-sm space-y-2">
                                 <div class="flex items-center gap-2 text-gray-300">✓ 支持特定影像设备解析</div>
                                 <div class="flex items-center gap-2 text-gray-300">✓ 4K 60fps 原始画质</div>
@@ -448,8 +452,7 @@
                         </div>
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-purple-400">打破地理限制</h3>
-                            <p class="text-gray-400 leading-relaxed mb-6">在局域网内无限制分发实验演示视频。教师端采集屏幕或摄像头，一键推流至全班终端。流畅度高达
-                                120fps，满足精细实验展示。</p>
+                            <p class="text-gray-400 leading-relaxed mb-6">在局域网内高效分发实验演示内容。教师端通过 Desktop 采集屏幕/摄像头推流，学生端可用 Desktop 或 Mobile 同步观看。</p>
                             <div class="bg-white/5 p-4 rounded-2xl">
                                 <div class="text-sm italic">“即使在复杂的实验室网络环境下，推拉流依然稳定如初。”</div>
                             </div>
@@ -472,8 +475,7 @@
                         </div>
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-white">跨平台，统一架构</h3>
-                            <p class="text-gray-400 leading-relaxed mb-6">顺应国产化浪潮，全面支持国产操作系统。基于 C++17
-                                分层设计，后端插件化。无论底层平台如何变化，都能提供统一的高质量体验。</p>
+                            <p class="text-gray-400 leading-relaxed mb-6">顺应国产化与跨平台部署需求，Desktop（Qt/C++）、Service（Go + Electron）与 Mobile（Flutter）统一协作，保持一致体验。</p>
                             <div class="flex gap-4">
                                 <div class="px-3 py-1 border border-white/20 rounded text-[10px]">桌面端 / 移动端</div>
                                 <div class="px-3 py-1 border border-white/20 rounded text-[10px]">全分层解耦</div>
@@ -495,10 +497,10 @@
 
                 <!-- 文字层级置顶 -->
                 <div class="relative z-20">
-                    <h3 class="text-4xl font-bold mb-6 text-gradient">全维度采集</h3>
+                    <h3 class="text-4xl font-bold mb-6 text-gradient">三端协同链路</h3>
                     <p class="text-gray-400 text-lg max-w-sm leading-relaxed">
-                        支持本地视频、摄像头、麦克风及屏幕共享。<br>
-                        <span class="text-white/40 italic text-sm font-light tracking-wider">视野所及，皆可分发。</span>
+                        Desktop 负责采集推流，Service 提供会话编排，Mobile 负责轻量播放。<br>
+                        <span class="text-white/40 italic text-sm font-light tracking-wider">从采集到观看，一条链路完成闭环。</span>
                     </p>
                 </div>
 
@@ -524,9 +526,9 @@
             <div class="bg-zinc-900 rounded-[40px] p-12 flex flex-col justify-between border border-white/5 relative overflow-hidden group"
                 data-aos="fade-up" data-aos-delay="100">
                 <div class="relative z-10">
-                    <h3 class="text-3xl font-bold mb-4 tracking-tight">核心驱动</h3>
+                    <h3 class="text-3xl font-bold mb-4 tracking-tight">核心引擎</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        基于 C++17 构建。内置高性能编解码器，支持软解/硬解动态切换。极致优化 CPU 占用。
+                        Service 内置 ZLMediaKit 与 gateway 解析能力，Desktop 基于 C++/Qt/FFmpeg 采集推流，Mobile 支持 HLS/HTTP-FLV/RTMP 拉流。
                     </p>
                 </div>
 
@@ -544,25 +546,25 @@
 
         </div>
 
-        <div class="mt-16 bg-zinc-900/70 rounded-[40px] p-8 md:p-12 border border-white/10" data-aos="fade-up">
+        <div id="demo" class="mt-16 bg-zinc-900/70 rounded-[40px] p-8 md:p-12 border border-white/10" data-aos="fade-up">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
                 <div class="lg:col-span-2">
                     <h3 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">产品实机演示</h3>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
-                        覆盖采集端、推流端与播放端的完整链路，展示 FPlayer 在复杂局域网环境中的稳定性与实时性表现。
+                        覆盖 Desktop、Service、Mobile 的完整实机链路，展示动态端口解析、多输入源编排与跨端播放的一体化表现。
                     </p>
                     <div class="space-y-3 text-sm text-gray-300">
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
-                            多输入源统一编排，快速切换推流通道
+                            多输入源组合推流，快速切换采集场景
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
-                            端到端低延迟链路，画面与操作同步
+                            Service 统一解析播放地址，避免手工拼接 URL
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
-                            支持实机演示录制，便于复盘与培训
+                            支持 Desktop 与 Mobile 同步观看，便于演示与培训
                         </div>
                     </div>
                 </div>
@@ -572,8 +574,9 @@
                         <img id="demo-main-image" src="./doc/img/pictures/product_demo_board.png" alt="FPlayer 产品实机演示主画面"
                             class="w-full h-auto block demo-zoomable transition-transform duration-500 hover:scale-[1.01]">
                     </div>
+                    <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态与播放联调。</p>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="rounded-2xl overflow-hidden demo-thumbnail is-active" data-demo-thumb data-demo-index="0">
                             <img src="./doc/img/pictures/product_demo_board.png" alt="FPlayer 实机演示缩略图 1"
                                 class="w-full h-auto block">
@@ -582,7 +585,146 @@
                             <img src="./doc/img/pictures/product_demo_board_2.png" alt="FPlayer 实机演示缩略图 2"
                                 class="w-full h-auto block">
                         </div>
+                        <div class="rounded-2xl overflow-hidden demo-thumbnail" data-demo-thumb data-demo-index="2">
+                            <img src="./doc/img/pictures/product_demo_board_3.png" alt="FPlayer 实机演示缩略图 3"
+                                class="w-full h-auto block">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden demo-thumbnail" data-demo-thumb data-demo-index="3">
+                            <img src="./doc/img/pictures/product_demo_board_4.png" alt="FPlayer 实机演示缩略图 4"
+                                class="w-full h-auto block">
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 三大项目深度介绍（含 UI 一览） -->
+    <section id="projects" class="py-32 px-6 bg-[#090909] border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-bold tracking-tight mb-6" data-aos="fade-up">三大项目深度介绍</h2>
+                <p class="text-gray-500 text-lg max-w-4xl mx-auto" data-aos="fade-up">
+                    FPlayer 由 `fplayer-ff-desktop`、`fplayer-ff-service`、`fplayer-ff-mobile` 组成完整闭环。Desktop 负责生产，Service 负责编排，Mobile 负责消费，三者共同构成可部署、可扩展、可演示的局域网流媒体体系。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-zinc-900/70 border border-white/10 rounded-[28px] p-8" data-aos="fade-up">
+                    <div class="rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black/30">
+                        <img src="./doc/img/projects/service/icon.png" alt="fplayer-ff-service UI"
+                            class="w-full h-56 object-contain p-4">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Service</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">内置 ZLMediaKit + gateway 的服务端分发与编排中枢，负责统一输出可播放地址与运行时信息。</p>
+                </div>
+
+                <div class="bg-zinc-900/70 border border-white/10 rounded-[28px] p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black/30">
+                        <img src="./doc/img/projects/desktop/build.png" alt="fplayer-ff-desktop UI"
+                            class="w-full h-56 object-contain p-2">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Desktop</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">桌面采集推流核心端，支持多输入源组合、监视与预览联动，承担完整生产侧能力。</p>
+                </div>
+
+                <div class="bg-zinc-900/70 border border-white/10 rounded-[28px] p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black/30">
+                        <img src="./doc/img/projects/mobile/icon.png" alt="fplayer-ff-mobile UI"
+                            class="w-full h-56 object-contain p-4">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Mobile</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">移动端轻量播放器，支持服务地址模式与直接 URL 模式，覆盖 HLS/HTTP-FLV/RTMP。</p>
+                </div>
+            </div>
+        <!-- </div> -->
+    <!-- </section> -->
+<br>
+    <!-- 三大项目深度细节 -->
+    <!-- <section class="py-32 px-6 bg-black"> -->
+        <!-- <div class="max-w-7xl mx-auto"> -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <article class="bg-zinc-900/70 border border-white/10 rounded-[30px] p-8" data-aos="fade-up">
+                    <h3 class="text-3xl font-bold mb-4">fplayer-ff-service</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        独立部署的服务端中枢，内置媒体分发内核与会话网关。它将复杂的端口、地址与会话编排统一抽象成可解析接口，降低联调与部署成本。
+                    </p>
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div>• <span class="text-white">核心职责：</span>内核拉起、会话解析、地址编排、运行时输出</div>
+                        <div>• <span class="text-white">关键能力：</span>`/api/v1/streams/resolve` + `runtime.json` 动态信息</div>
+                        <div>• <span class="text-white">技术栈：</span>Go gateway + ZLMediaKit + Electron UI</div>
+                        <div>• <span class="text-white">部署方式：</span>支持 Windows / Linux 一键构建与可发布包分发</div>
+                        <div>• <span class="text-white">适用场景：</span>多终端演示、服务集中管理、局域网统一调度</div>
+                    </div>
+                </article>
+
+                <article class="bg-zinc-900/70 border border-white/10 rounded-[30px] p-8" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-3xl font-bold mb-4">fplayer-ff-desktop</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        桌面端是链路生产核心，负责采集、组合、推流与监看。围绕多输入源场景进行交互与能力设计，是系统的操作中枢与内容生产端。
+                    </p>
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div>• <span class="text-white">核心职责：</span>采集端控制、组合推流、监视/预览联动</div>
+                        <div>• <span class="text-white">关键能力：</span>本地视频、摄像头、屏幕等多源统一编排</div>
+                        <div>• <span class="text-white">技术栈：</span>C++17 + Qt 6.10 + FFmpeg（含可扩展后端架构）</div>
+                        <div>• <span class="text-white">工程特性：</span>分层解耦（App/Widget/Service/Runtime/Backend/API）</div>
+                        <div>• <span class="text-white">适用场景：</span>实验教学、工业监控、医疗影像示教</div>
+                    </div>
+                </article>
+
+                <article class="bg-zinc-900/70 border border-white/10 rounded-[30px] p-8" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-3xl font-bold mb-4">fplayer-ff-mobile</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        移动端聚焦轻量播放与快速接入，既可通过服务地址自动解析流地址，也可直接输入 URL。它让巡检、演示与移动回看变得更高效。
+                    </p>
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div>• <span class="text-white">核心职责：</span>移动端拉流播放、跨网络环境快速联调</div>
+                        <div>• <span class="text-white">关键能力：</span>服务地址模式 / 直接 URL 模式双通道</div>
+                        <div>• <span class="text-white">协议支持：</span>HLS、HTTP-FLV、RTMP</div>
+                        <div>• <span class="text-white">技术栈：</span>Flutter（Android / Windows 构建链路）</div>
+                        <div>• <span class="text-white">适用场景：</span>移动巡检、远端观看、跨终端联合演示</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 三端协同工作流 -->
+    <section class="py-28 px-6 bg-[#0b0b0b] border-y border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <h2 class="text-5xl md:text-6xl font-bold tracking-tight mb-5" data-aos="fade-up">三端协同工作流</h2>
+                <p class="text-gray-500 text-lg max-w-3xl mx-auto" data-aos="fade-up">
+                    从内容采集到移动端播放，FPlayer 将复杂链路拆解为可理解、可运维、可扩展的三步流程。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[26px] p-8" data-aos="fade-up">
+                    <div class="text-green-400 text-xs tracking-[0.22em] uppercase mb-4">Step 01</div>
+                    <h3 class="text-2xl font-bold mb-3">Desktop 采集与推流</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-5">
+                        采集本地视频、摄像头或屏幕画面，完成多输入源编排后推流到服务端，构建统一内容入口。
+                    </p>
+                    <div class="text-xs text-gray-500">关键词：组合推流 / 监视预览 / 多源切换</div>
+                </div>
+
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[26px] p-8" data-aos="fade-up" data-aos-delay="120">
+                    <div class="text-blue-400 text-xs tracking-[0.22em] uppercase mb-4">Step 02</div>
+                    <h3 class="text-2xl font-bold mb-3">Service 编排与解析</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-5">
+                        由 gateway 统一管理会话与地址映射，通过 resolve 接口和 runtime 信息输出稳定可用的播放入口。
+                    </p>
+                    <div class="text-xs text-gray-500">关键词：ZLMediaKit / gateway / 动态端口</div>
+                </div>
+
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[26px] p-8" data-aos="fade-up" data-aos-delay="240">
+                    <div class="text-purple-400 text-xs tracking-[0.22em] uppercase mb-4">Step 03</div>
+                    <h3 class="text-2xl font-bold mb-3">Mobile 快速拉流播放</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-5">
+                        移动端通过服务地址模式或直接 URL 模式接入，按需选择 HLS/HTTP-FLV/RTMP 进行实时播放。
+                    </p>
+                    <div class="text-xs text-gray-500">关键词：轻量接入 / 多协议 / 移动回看</div>
                 </div>
             </div>
         </div>
@@ -592,31 +734,31 @@
     <section id="tech" class="py-32 bg-black border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
             <div data-aos="fade-right">
-                <h2 class="text-5xl font-bold mb-8 tracking-tighter">分层解耦，<br>稳如磐石。</h2>
+                <h2 class="text-5xl font-bold mb-8 tracking-tighter">分层协作，<br>稳如磐石。</h2>
                 <div class="space-y-6">
-                    <p class="text-gray-400">只有 Runtime 认识所有 Backend，实现工厂职责的完美闭环。API 抽象层统一接口，让维护与扩展变得前所未有的简单。</p>
+                    <p class="text-gray-400">Desktop 侧坚持分层解耦架构，Service 侧负责网关会话编排与内核调度，Mobile 侧聚焦播放体验，三端通过统一流地址模型联动。</p>
                     <div class="flex items-center gap-4 text-xs tracking-widest text-gray-500 uppercase font-bold">
                         <span>C++ 17</span>
                         <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
                         <span>Qt 6.10</span>
                         <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                        <span>WebRTC</span>
+                        <span>Go / Flutter</span>
                     </div>
                 </div>
             </div>
             <div class="bg-zinc-950 p-10 rounded-[32px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)]"
                 data-aos="flip-left">
                 <pre class="text-xs text-green-500/80 font-mono leading-loose">
-<span class="text-white">// 架构说明书</span>
-app → widget → service
+<span class="text-white">// 三端协同架构</span>
+desktop (capture / push)
   ↓
-runtime (Factory / Assembly)
+service (gateway + zlm kernel)
   ↓
-backend (Qt / FFmpeg / WebRTC)
+mobile (hls / http-flv / rtmp play)
   ↓
-API (Interfaces)
+runtime.json / resolve api
   ↓
-Common Utilities / Tools
+cross-platform release pipeline
                 </pre>
             </div>
         </div>
@@ -629,14 +771,14 @@ Common Utilities / Tools
             data-aos-delay="200">
             <a href="https://github.com/ff-283/fplayer-ff-desktop/releases"
                 class="btn-primary px-12 py-5 text-xl">免费下载</a>
-            <a href="https://github.com/ff-283/fplayer-ff-desktop"
-                class="text-blue-500 text-xl hover:underline underline-offset-8">获取 GitHub 源码
+            <a href="https://github.com/ff-283"
+                class="text-blue-500 text-xl hover:underline underline-offset-8">查看三端项目源码
                 ></a>
         </div>
     </section>
 
     <footer class="py-12 border-t border-white/5 text-center text-gray-600 text-[10px] uppercase tracking-widest">
-        <p>© 2026 FPlayer Project. Powered by C++17 & Qt 6.</p>
+        <p>© 2026 FPlayer Project. Powered by Desktop + Service + Mobile.</p>
     </footer>
 
     <div id="image-lightbox" class="image-lightbox" aria-hidden="true">
@@ -670,14 +812,27 @@ Common Utilities / Tools
         const lightboxDots = document.getElementById('lightbox-dots');
         const mainDemoImage = document.getElementById('demo-main-image');
         const demoThumbs = document.querySelectorAll('[data-demo-thumb]');
+        const demoCaptionEl = document.getElementById('demo-main-caption');
         const demoGallery = [
             {
                 src: './doc/img/pictures/product_demo_board.png',
-                alt: 'FPlayer 产品实机演示主画面'
+                alt: 'FPlayer 产品实机演示主画面',
+                caption: 'Desktop 端综合演示看板：多输入源采集、推流状态与播放联调。'
             },
             {
                 src: './doc/img/pictures/product_demo_board_2.png',
-                alt: 'FPlayer 产品实机演示主画面 2'
+                alt: 'FPlayer 产品实机演示主画面 2',
+                caption: 'Desktop 端推拉流联动视图：用于演示链路稳定性与切换体验。'
+            },
+            {
+                src: './doc/img/pictures/product_demo_board_3.png',
+                alt: 'FPlayer 产品实机演示主画面 3',
+                caption: 'Mobile 服务地址模式：通过 gateway 自动解析 HLS/FLV/RTMP 播放地址。'
+            },
+            {
+                src: './doc/img/pictures/product_demo_board_4.png',
+                alt: 'FPlayer 产品实机演示主画面 4',
+                caption: 'Service Console：创建流、管理 gateway 与当前流信息调试。'
             }
         ];
         let currentImageIndex = 0;
@@ -688,6 +843,7 @@ Common Utilities / Tools
             currentImageIndex = index;
             mainDemoImage.src = target.src;
             mainDemoImage.alt = target.alt;
+            if (demoCaptionEl) demoCaptionEl.textContent = target.caption || '';
             demoThumbs.forEach((thumb) => {
                 const thumbIndex = Number(thumb.dataset.demoIndex);
                 thumb.classList.toggle('is-active', thumbIndex === currentImageIndex);
@@ -759,6 +915,23 @@ Common Utilities / Tools
 
         setMainDemoImage(0);
         buildDots();
+        const navLinks = document.querySelectorAll('.nav-link');
+        const observedSections = ['features', 'demo', 'projects', 'scenarios', 'tech']
+            .map((id) => document.getElementById(id))
+            .filter(Boolean);
+        if ('IntersectionObserver' in window && observedSections.length) {
+            const navObserver = new IntersectionObserver((entries) => {
+                const visible = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+                if (!visible) return;
+                const activeId = visible.target.id;
+                navLinks.forEach((link) => {
+                    link.classList.toggle('is-active', link.getAttribute('href') === `#${activeId}`);
+                });
+            }, { threshold: [0.35, 0.6], rootMargin: '-20% 0px -40% 0px' });
+            observedSections.forEach((section) => navObserver.observe(section));
+        }
         lightboxPrevBtn.addEventListener('click', showPrevImage);
         lightboxNextBtn.addEventListener('click', showNextImage);
         lightboxCloseBtn.addEventListener('click', closeLightbox);
