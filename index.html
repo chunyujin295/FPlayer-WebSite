@@ -337,6 +337,7 @@
                 <div class="hidden md:flex space-x-8 text-[12px] font-light text-gray-400">
                     <a href="#features" class="nav-link hover:text-white uppercase tracking-widest">功能</a>
                     <a href="#demo" class="nav-link hover:text-white uppercase tracking-widest">实机演示</a>
+                    <a href="#ai" class="nav-link hover:text-white uppercase tracking-widest">AI 视觉</a>
                     <a href="#projects" class="nav-link hover:text-white uppercase tracking-widest">项目介绍</a>
                     <a href="#scenarios" class="nav-link hover:text-white uppercase tracking-widest">应用场景</a>
                     <a href="#tech" class="nav-link hover:text-white uppercase tracking-widest">技术架构</a>
@@ -532,8 +533,7 @@
                 <div class="relative z-10">
                     <h3 class="text-3xl font-bold mb-4 tracking-tight">核心引擎</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Service 内置 ZLMediaKit 与 gateway 解析能力，Desktop 基于 C++/Qt/FFmpeg 采集推流，Mobile 支持 HLS/HTTP-FLV/RTMP
-                        拉流。
+                        Service 内置 ZLMediaKit 与 gateway 解析能力，Desktop 基于 C++/Qt/FFmpeg 采集推流并集成 AI 多模态视觉分析，Mobile 支持 HLS/HTTP-FLV/RTMP 拉流。
                     </p>
                 </div>
 
@@ -557,12 +557,12 @@
                 <div class="lg:col-span-2">
                     <h3 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">产品实机演示</h3>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
-                        覆盖 Desktop、Service、Mobile 的完整实机链路，展示动态端口解析、多输入源编排与跨端播放的一体化表现。
+                        覆盖 Desktop、Service、Mobile 的完整实机链路，展示动态端口解析、多输入源编排、跨端播放、图池管理与 AI 识图对话的一体化表现。
                     </p>
                     <div class="space-y-3 text-sm text-gray-300">
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
-                            多输入源组合推流，快速切换采集场景
+                            多输入源组合推流，支持拉流录制与即时截图
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
@@ -570,7 +570,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
-                            支持 Desktop 与 Mobile 同步观看，便于演示与培训
+                            图池集中管理截图，右键唤起 AI 多模态视觉分析
                         </div>
                     </div>
                 </div>
@@ -581,7 +581,7 @@
                             alt="FPlayer 产品实机演示主画面"
                             class="w-full h-auto block demo-zoomable transition-transform duration-500 hover:scale-[1.01]">
                     </div>
-                    <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态与播放联调。</p>
+                    <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态、播放联调、图池与 AI 识图。</p>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="rounded-2xl overflow-hidden demo-thumbnail is-active" data-demo-thumb
@@ -603,6 +603,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 视觉分析 -->
+    <section id="ai" class="py-32 px-6 bg-[#0a0a0a] border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight" data-aos="fade-up">AI 视觉分析，<br>所见即所得。</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto" data-aos="fade-up">
+                    图池中右键任意截图即可唤起 AI 识图对话，接入主流多模态大模型，流式逐字呈现分析结果。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[28px] p-10 relative overflow-hidden group"
+                    data-aos="fade-up">
+                    <div class="text-green-400 text-xs tracking-[0.22em] uppercase mb-5">Multi-Modal</div>
+                    <h3 class="text-2xl font-bold mb-4">多模态模型接入</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        兼容 OpenAI 多模态 API 标准，支持智谱 GLM-4v、通义千问 Qwen-VL、Ollama 本地 LLaVA 等视觉模型，按需选择云端或本地部署方案。
+                    </p>
+                </div>
+
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[28px] p-10 relative overflow-hidden group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-blue-400 text-xs tracking-[0.22em] uppercase mb-5">Streaming</div>
+                    <h3 class="text-2xl font-bold mb-4">SSE 流式对话</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        基于 SSE 协议的流式逐字输出，气泡式对话界面配合闪烁光标，还原自然对话节奏。图片自动压缩至 2048px 后以 base64 发送，兼顾质量与速度。
+                    </p>
+                </div>
+
+                <div class="bg-zinc-900/80 border border-white/10 rounded-[28px] p-10 relative overflow-hidden group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-purple-400 text-xs tracking-[0.22em] uppercase mb-5">Customizable</div>
+                    <h3 class="text-2xl font-bold mb-4">灵活配置扩展</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        系统设置中配置 API 端点、密钥与模型参数；用户气泡、AI 气泡、聊天背景与工具栏颜色均可自定义，适配不同视觉风格偏好。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900/60 rounded-[24px] p-8 border border-white/5 text-center" data-aos="fade-up">
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    <span class="text-white font-medium">推荐入门：</span>智谱 glm-4v-flash（免费额度）或通义千问 qwen-vl-plus（国内直连）&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span class="text-white font-medium">关键提示：</span>模型必须支持图片输入（vision / multimodal），纯文本模型无法使用
+                </p>
             </div>
         </div>
     </section>
@@ -636,7 +684,7 @@
                             class="w-full h-56 object-contain p-2">
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Desktop</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">桌面采集推流核心端，支持多输入源组合、监视与预览联动，承担完整生产侧能力。</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">桌面采集推流核心端，支持多输入源组合、监视预览联动、图池管理与 AI 视觉分析，承担完整生产侧能力。</p>
                 </div>
 
                 <div class="bg-zinc-900/70 border border-white/10 rounded-[28px] p-8" data-aos="fade-up"
@@ -676,14 +724,14 @@
                     data-aos-delay="100">
                     <h3 class="text-3xl font-bold mb-4">fplayer-ff-desktop</h3>
                     <p class="text-gray-300 text-sm leading-relaxed mb-6">
-                        桌面端是链路生产核心，负责采集、组合、推流与监看。围绕多输入源场景进行交互与能力设计，是系统的操作中枢与内容生产端。
+                        桌面端是链路生产核心，负责采集、组合、推流与监看。新增图池管理与 AI 识图对话，围绕多输入源场景进行交互与能力设计，是系统的操作中枢与内容生产端。
                     </p>
                     <div class="space-y-3 text-sm text-gray-400">
-                        <div>• <span class="text-white">核心职责：</span>采集端控制、组合推流、监视/预览联动</div>
-                        <div>• <span class="text-white">关键能力：</span>本地视频、摄像头、屏幕等多源统一编排</div>
-                        <div>• <span class="text-white">技术栈：</span>C++17 + Qt 6.10 + FFmpeg（含可扩展后端架构）</div>
-                        <div>• <span class="text-white">工程特性：</span>分层解耦（App/Widget/Service/Runtime/Backend/API）</div>
-                        <div>• <span class="text-white">适用场景：</span>实验教学、工业监控、医疗影像示教</div>
+                        <div>• <span class="text-white">核心职责：</span>采集端控制、组合推流、监视/预览联动、截图图池管理</div>
+                        <div>• <span class="text-white">关键能力：</span>多源统一编排、AI 视觉分析对话、拉流录制与截图</div>
+                        <div>• <span class="text-white">技术栈：</span>C++17 + Qt 6.10 + FFmpeg + OpenAI 兼容多模态 API</div>
+                        <div>• <span class="text-white">工程特性：</span>分层解耦（App/Widget/Service/Runtime/Backend/API）；SSE 流式响应</div>
+                        <div>• <span class="text-white">适用场景：</span>实验教学、工业监控、医疗影像示教、AI 辅助内容分析</div>
                     </div>
                 </article>
 
@@ -720,9 +768,9 @@
                     <div class="text-green-400 text-xs tracking-[0.22em] uppercase mb-4">Step 01</div>
                     <h3 class="text-2xl font-bold mb-3">Desktop 采集与推流</h3>
                     <p class="text-gray-400 text-sm leading-relaxed mb-5">
-                        采集本地视频、摄像头或屏幕画面，完成多输入源编排后推流到服务端，构建统一内容入口。
+                        采集本地视频、摄像头或屏幕画面，完成多输入源编排后推流到服务端。支持拉流截图与录制，构建统一内容生产入口。
                     </p>
-                    <div class="text-xs text-gray-500">关键词：组合推流 / 监视预览 / 多源切换</div>
+                    <div class="text-xs text-gray-500">关键词：组合推流 / 监视预览 / 截图录制 / 多源切换</div>
                 </div>
 
                 <div class="bg-zinc-900/80 border border-white/10 rounded-[26px] p-8" data-aos="fade-up"
@@ -754,13 +802,15 @@
             <div data-aos="fade-right">
                 <h2 class="text-5xl font-bold mb-8 tracking-tighter">分层协作，<br>稳如磐石。</h2>
                 <div class="space-y-6">
-                    <p class="text-gray-400">Desktop 侧坚持分层解耦架构，Service 侧负责网关会话编排与内核调度，Mobile 侧聚焦播放体验，三端通过统一流地址模型联动。</p>
+                    <p class="text-gray-400">Desktop 侧坚持分层解耦架构并集成多模态 AI 视觉能力，Service 侧负责网关会话编排与内核调度，Mobile 侧聚焦播放体验，三端通过统一流地址模型联动。</p>
                     <div class="flex items-center gap-4 text-xs tracking-widest text-gray-500 uppercase font-bold">
                         <span>C++ 17</span>
                         <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
                         <span>Qt 6.10</span>
                         <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
                         <span>Go / Flutter</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>AI Vision</span>
                     </div>
                 </div>
             </div>
@@ -835,7 +885,7 @@ cross-platform release pipeline
             {
                 src: './doc/img/pictures/product_demo_board.png',
                 alt: 'FPlayer 产品实机演示主画面',
-                caption: 'Desktop 端综合演示看板：多输入源采集、推流状态与播放联调。'
+                caption: 'Desktop 端综合演示看板：多输入源采集、推流状态、播放联调、图池与 AI 识图。'
             },
             {
                 src: './doc/img/pictures/product_demo_board_2.png',
@@ -934,7 +984,7 @@ cross-platform release pipeline
         setMainDemoImage(0);
         buildDots();
         const navLinks = document.querySelectorAll('.nav-link');
-        const observedSections = ['features', 'demo', 'projects', 'scenarios', 'tech']
+        const observedSections = ['features', 'demo', 'ai', 'projects', 'scenarios', 'tech']
             .map((id) => document.getElementById(id))
             .filter(Boolean);
         if ('IntersectionObserver' in window && observedSections.length) {
