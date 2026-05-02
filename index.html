@@ -583,7 +583,7 @@
                     </div>
                     <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态、播放联调、图池与 AI 识图。</p>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                         <div class="rounded-2xl overflow-hidden demo-thumbnail is-active" data-demo-thumb
                             data-demo-index="0">
                             <img src="./doc/img/pictures/product_demo_board.png" alt="FPlayer 实机演示缩略图 1"
@@ -599,6 +599,10 @@
                         </div>
                         <div class="rounded-2xl overflow-hidden demo-thumbnail" data-demo-thumb data-demo-index="3">
                             <img src="./doc/img/pictures/product_demo_board_4.png" alt="FPlayer 实机演示缩略图 4"
+                                class="w-full h-auto block">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden demo-thumbnail" data-demo-thumb data-demo-index="4">
+                            <img src="./doc/img/projects/desktop/ai.gif" alt="FPlayer 实机演示缩略图 5"
                                 class="w-full h-auto block">
                         </div>
                     </div>
@@ -644,6 +648,15 @@
                         系统设置中配置 API 端点、密钥与模型参数；用户气泡、AI 气泡、聊天背景与工具栏颜色均可自定义，适配不同视觉风格偏好。
                     </p>
                 </div>
+            </div>
+
+            <div class="mb-12" data-aos="fade-up">
+                <div class="demo-glow-frame rounded-3xl overflow-hidden w-full max-w-4xl mx-auto">
+                    <img src="./doc/img/projects/desktop/ai.gif"
+                        alt="FPlayer AI 视觉分析对话界面"
+                        class="w-full h-auto block">
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">AI 视觉分析对话界面：右键图池截图唤起多模态对话，支持流式逐字输出与气泡式交互。</p>
             </div>
 
             <div class="bg-zinc-900/60 rounded-[24px] p-8 border border-white/5 text-center" data-aos="fade-up">
@@ -901,6 +914,11 @@ cross-platform release pipeline
                 src: './doc/img/pictures/product_demo_board_4.png',
                 alt: 'FPlayer 产品实机演示主画面 4',
                 caption: 'Service Console：创建流、管理 gateway 与当前流信息调试。'
+            },
+            {
+                src: './doc/img/projects/desktop/ai.gif',
+                alt: 'FPlayer AI 视觉分析演示',
+                caption: 'AI 视觉分析：右键图池截图唤起多模态对话，流式逐字呈现分析结果。'
             }
         ];
         let currentImageIndex = 0;
