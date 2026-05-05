@@ -140,33 +140,101 @@
         }
 
         /* Tailwind 工具类覆盖 */
-        [data-theme="light"] .bg-black { background-color: #f5f5f7 !important; }
-        [data-theme="light"] .bg-\[\#0a0a0a\] { background-color: #f0f0f2 !important; }
-        [data-theme="light"] .bg-\[\#090909\] { background-color: #fafafa !important; }
-        [data-theme="light"] .bg-\[\#0b0b0b\] { background-color: #eeeeee !important; }
-        [data-theme="light"] .bg-\[\#050505\] { background-color: #fafafa !important; }
-        [data-theme="light"] .bg-zinc-900 { background-color: #f4f4f5 !important; }
-        [data-theme="light"] .bg-zinc-900\/70 { background-color: rgba(244, 244, 245, 0.7) !important; }
-        [data-theme="light"] .bg-zinc-900\/80 { background-color: rgba(244, 244, 245, 0.8) !important; }
-        [data-theme="light"] .bg-zinc-900\/60 { background-color: rgba(244, 244, 245, 0.6) !important; }
-        [data-theme="light"] .bg-zinc-950 { background-color: #e4e4e7 !important; }
-        [data-theme="light"] .bg-black\/30 { background-color: rgba(0, 0, 0, 0.04) !important; }
+        [data-theme="light"] .bg-black {
+            background-color: #f5f5f7 !important;
+        }
 
-        [data-theme="light"] .text-white { color: #1d1d1f !important; }
-        [data-theme="light"] .text-white\/5 { color: rgba(0, 0, 0, 0.05) !important; }
-        [data-theme="light"] .text-white\/10 { color: rgba(0, 0, 0, 0.1) !important; }
-        [data-theme="light"] .text-white\/40 { color: rgba(0, 0, 0, 0.45) !important; }
-        [data-theme="light"] .text-gray-300 { color: #3f3f46 !important; }
-        [data-theme="light"] .text-gray-400 { color: #52525b !important; }
-        [data-theme="light"] .text-gray-500 { color: #71717a !important; }
-        [data-theme="light"] .text-gray-600 { color: #a1a1aa !important; }
+        [data-theme="light"] .bg-\[\#0a0a0a\] {
+            background-color: #f0f0f2 !important;
+        }
 
-        [data-theme="light"] .border-white\/5 { border-color: rgba(0, 0, 0, 0.05) !important; }
-        [data-theme="light"] .border-white\/10 { border-color: rgba(0, 0, 0, 0.08) !important; }
-        [data-theme="light"] .border-white\/20 { border-color: rgba(0, 0, 0, 0.12) !important; }
+        [data-theme="light"] .bg-\[\#090909\] {
+            background-color: #fafafa !important;
+        }
 
-        [data-theme="light"] .hover\:text-white:hover { color: #1d1d1f !important; }
-        [data-theme="light"] .hover\:border-white\/20:hover { border-color: rgba(0, 0, 0, 0.12) !important; }
+        [data-theme="light"] .bg-\[\#0b0b0b\] {
+            background-color: #eeeeee !important;
+        }
+
+        [data-theme="light"] .bg-\[\#050505\] {
+            background-color: #fafafa !important;
+        }
+
+        [data-theme="light"] .bg-zinc-900 {
+            background-color: #f4f4f5 !important;
+        }
+
+        [data-theme="light"] .bg-zinc-900\/70 {
+            background-color: rgba(244, 244, 245, 0.7) !important;
+        }
+
+        [data-theme="light"] .bg-zinc-900\/80 {
+            background-color: rgba(244, 244, 245, 0.8) !important;
+        }
+
+        [data-theme="light"] .bg-zinc-900\/60 {
+            background-color: rgba(244, 244, 245, 0.6) !important;
+        }
+
+        [data-theme="light"] .bg-zinc-950 {
+            background-color: #e4e4e7 !important;
+        }
+
+        [data-theme="light"] .bg-black\/30 {
+            background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        [data-theme="light"] .text-white {
+            color: #1d1d1f !important;
+        }
+
+        [data-theme="light"] .text-white\/5 {
+            color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        [data-theme="light"] .text-white\/10 {
+            color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        [data-theme="light"] .text-white\/40 {
+            color: rgba(0, 0, 0, 0.45) !important;
+        }
+
+        [data-theme="light"] .text-gray-300 {
+            color: #3f3f46 !important;
+        }
+
+        [data-theme="light"] .text-gray-400 {
+            color: #52525b !important;
+        }
+
+        [data-theme="light"] .text-gray-500 {
+            color: #71717a !important;
+        }
+
+        [data-theme="light"] .text-gray-600 {
+            color: #a1a1aa !important;
+        }
+
+        [data-theme="light"] .border-white\/5 {
+            border-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        [data-theme="light"] .border-white\/10 {
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+
+        [data-theme="light"] .border-white\/20 {
+            border-color: rgba(0, 0, 0, 0.12) !important;
+        }
+
+        [data-theme="light"] .hover\:text-white:hover {
+            color: #1d1d1f !important;
+        }
+
+        [data-theme="light"] .hover\:border-white\/20:hover {
+            border-color: rgba(0, 0, 0, 0.12) !important;
+        }
 
         /* 主题切换按钮 */
         #theme-toggle {
@@ -503,9 +571,19 @@
             </div>
             <div class="flex items-center space-x-6">
                 <a href="https://github.com/ff-283" class="text-xs text-gray-400 hover:text-white transition">GitHub</a>
-                <button id="theme-toggle" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition border border-white/10 hover:border-white/20" aria-label="切换亮暗模式">
-                    <svg id="sun-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                <button id="theme-toggle"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition border border-white/10 hover:border-white/20"
+                    aria-label="切换亮暗模式">
+                    <svg id="sun-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <svg id="moon-icon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
                 </button>
                 <a href="https://github.com/ff-283/fplayer-ff-desktop/releases" class="btn-primary text-xs">下载
                     Desktop</a>
@@ -564,7 +642,8 @@
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-green-400">毫秒级工业响应</h3>
                             <p class="text-gray-400 leading-relaxed mb-6">
-                                针对复杂局域网环境优化，Desktop 可进行多机位采集与组合推流，Service 统一编排播放地址，为生产监控提供稳定、低延迟的链路基础。将 Service 部署至公网服务器，即可实现跨局域网推拉流与网络直播。</p>
+                                针对复杂局域网环境优化，Desktop 可进行多机位采集与组合推流，Service 统一编排播放地址，为生产监控提供稳定、低延迟的链路基础。将 Service
+                                部署至公网服务器，即可实现跨局域网推拉流与网络直播。</p>
                             <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
                                 <div>
                                     <div class="text-xl font-bold">SDK</div>
@@ -618,7 +697,8 @@
                         </div>
                         <div class="card-face card-back">
                             <h3 class="text-2xl font-bold mb-4 text-purple-400">打破地理限制</h3>
-                            <p class="text-gray-400 leading-relaxed mb-6">在局域网内高效分发实验演示内容，Service 部署至公网即可实现跨校区直播与远程教学。教师端通过 Desktop 采集屏幕/摄像头推流，学生端可用
+                            <p class="text-gray-400 leading-relaxed mb-6">在局域网内高效分发实验演示内容，Service
+                                部署至公网即可实现跨校区直播与远程教学。教师端通过 Desktop 采集屏幕/摄像头推流，学生端可用
                                 Desktop 或 Mobile 同步观看。</p>
                             <div class="bg-white/5 p-4 rounded-2xl">
                                 <div class="text-sm italic">“即使在复杂的实验室网络环境下，推拉流依然稳定如初。”</div>
@@ -696,7 +776,8 @@
                 <div class="relative z-10">
                     <h3 class="text-3xl font-bold mb-4 tracking-tight">核心引擎</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Service 内置 ZLMediaKit 与 gateway 解析能力，Desktop 基于 C++/Qt/FFmpeg 采集推流并集成 AI 多模态视觉分析，Mobile 支持 HLS/HTTP-FLV/RTMP 拉流。
+                        Service 内置 ZLMediaKit 与 gateway 解析能力，Desktop 基于 C++/Qt/FFmpeg 采集推流并集成 AI 多模态视觉分析，Mobile 支持
+                        HLS/HTTP-FLV/RTMP 拉流。
                     </p>
                 </div>
 
@@ -744,7 +825,8 @@
                             alt="FPlayer 产品实机演示主画面"
                             class="w-full h-auto block demo-zoomable transition-transform duration-500 hover:scale-[1.01]">
                     </div>
-                    <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态、播放联调、图池与 AI 识图。</p>
+                    <p id="demo-main-caption" class="text-xs text-gray-400 px-1">Desktop 端综合演示看板：多输入源采集、推流状态、播放联调、图池与 AI
+                        识图。</p>
 
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                         <div class="rounded-2xl overflow-hidden demo-thumbnail is-active" data-demo-thumb
@@ -778,7 +860,8 @@
     <section id="ai" class="py-32 px-6 bg-[#0a0a0a] border-y border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight" data-aos="fade-up">AI 视觉分析，<br>所见即所得。</h2>
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight" data-aos="fade-up">AI 视觉分析，<br>所见即所得。
+                </h2>
                 <p class="text-gray-500 text-lg max-w-2xl mx-auto" data-aos="fade-up">
                     图池中右键任意截图即可唤起 AI 识图对话，接入主流多模态大模型，流式逐字呈现分析结果。
                 </p>
@@ -815,16 +898,15 @@
 
             <div class="mb-12" data-aos="fade-up">
                 <div class="demo-glow-frame rounded-3xl overflow-hidden w-full max-w-4xl mx-auto">
-                    <img src="./doc/img/projects/desktop/ai.gif"
-                        alt="FPlayer AI 视觉分析对话界面"
-                        class="w-full h-auto block">
+                    <img src="./doc/img/projects/desktop/ai.gif" alt="FPlayer AI 视觉分析对话界面" class="w-full h-auto block">
                 </div>
                 <p class="text-xs text-gray-500 mt-3 text-center">AI 视觉分析对话界面：右键图池截图唤起多模态对话，支持流式逐字输出与气泡式交互。</p>
             </div>
 
             <div class="bg-zinc-900/60 rounded-[24px] p-8 border border-white/5 text-center" data-aos="fade-up">
                 <p class="text-gray-500 text-sm leading-relaxed">
-                    <span class="text-white font-medium">推荐入门：</span>智谱 glm-4v-flash（免费额度）或通义千问 qwen-vl-plus（国内直连）&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span class="text-white font-medium">推荐入门：</span>智谱 glm-4v-flash（免费额度）或通义千问
+                    qwen-vl-plus（国内直连）&nbsp;&nbsp;|&nbsp;&nbsp;
                     <span class="text-white font-medium">关键提示：</span>模型必须支持图片输入（vision / multimodal），纯文本模型无法使用
                 </p>
             </div>
@@ -860,7 +942,8 @@
                             class="w-full h-56 object-contain p-2">
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Desktop</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">桌面采集推流核心端，支持多输入源组合、监视预览联动、图池管理与 AI 视觉分析，承担完整生产侧能力。</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">桌面采集推流核心端，支持多输入源组合、监视预览联动、图池管理与 AI 视觉分析，承担完整生产侧能力。
+                    </p>
                 </div>
 
                 <div class="bg-zinc-900/70 border border-white/10 rounded-[28px] p-8" data-aos="fade-up"
@@ -888,7 +971,8 @@
                     </p>
                     <div class="space-y-3 text-sm text-gray-400">
                         <div>• <span class="text-white">核心职责：</span>内核拉起、会话解析、地址编排、运行时输出</div>
-                        <div>• <span class="text-white">关键能力：</span>`/api/v1/streams/resolve` + `runtime.json` 动态信息
+                        <div>• <span class="text-white">关键能力：</span>`/api/v1/streams/resolve` + `runtime.json`
+                            动态信息，可扩展、可动态控制的流解析服务
                         </div>
                         <div>• <span class="text-white">技术栈：</span>Go gateway + ZLMediaKit + Electron UI</div>
                         <div>• <span class="text-white">部署方式：</span>支持 Windows / Linux 一键构建与可发布包分发</div>
@@ -906,7 +990,8 @@
                         <div>• <span class="text-white">核心职责：</span>采集端控制、组合推流、监视/预览联动、截图图池管理</div>
                         <div>• <span class="text-white">关键能力：</span>多源统一编排、AI 视觉分析对话、拉流录制与截图</div>
                         <div>• <span class="text-white">技术栈：</span>C++17 + Qt 6.10 + FFmpeg + OpenAI 兼容多模态 API</div>
-                        <div>• <span class="text-white">工程特性：</span>分层解耦（App/Widget/Service/Runtime/Backend/API）；SSE 流式响应</div>
+                        <div>• <span class="text-white">工程特性：</span>分层解耦（App/Widget/Service/Runtime/Backend/API）；SSE
+                            流式响应</div>
                         <div>• <span class="text-white">适用场景：</span>实验教学、工业监控、医疗影像示教、AI 辅助内容分析</div>
                     </div>
                 </article>
@@ -978,7 +1063,8 @@
             <div data-aos="fade-right">
                 <h2 class="text-5xl font-bold mb-8 tracking-tighter">分层协作，<br>稳如磐石。</h2>
                 <div class="space-y-6">
-                    <p class="text-gray-400">Desktop 侧坚持分层解耦架构并集成多模态 AI 视觉能力，Service 侧负责网关会话编排与内核调度，Mobile 侧聚焦播放体验，三端通过统一流地址模型联动。</p>
+                    <p class="text-gray-400">Desktop 侧坚持分层解耦架构并集成多模态 AI 视觉能力，Service 侧负责网关会话编排与内核调度，Mobile
+                        侧聚焦播放体验，三端通过统一流地址模型联动。</p>
                     <div class="flex items-center gap-4 text-xs tracking-widest text-gray-500 uppercase font-bold">
                         <span>C++ 17</span>
                         <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
