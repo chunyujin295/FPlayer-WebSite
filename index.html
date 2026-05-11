@@ -16,6 +16,13 @@
     <link rel="icon" type="image/png" href="./doc/img/icons/icon.png">
     <link rel="apple-touch-icon" href="./doc/img/icons/icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@chenglou/pretext": "./node_modules/@chenglou/pretext/dist/layout.js"
+            }
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
@@ -249,6 +256,23 @@
         [data-theme="light"] #theme-toggle:hover {
             border-color: rgba(0, 0, 0, 0.2) !important;
             color: #1d1d1f !important;
+        }
+
+        [data-theme="light"] .editorial-line {
+            color: #3f3f46;
+        }
+
+        [data-theme="light"] .editorial-line:hover {
+            color: #0071e3;
+        }
+
+        [data-theme="light"] .editorial-orb {
+            opacity: 0.7;
+        }
+
+        [data-theme="light"] .editorial-hint {
+            background: rgba(255, 255, 255, 0.7);
+            color: rgba(0, 0, 0, 0.55);
         }
 
         body {
@@ -550,6 +574,77 @@
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
         }
+
+        /* ========== Pretext 动效元素 ========== */
+
+        /* Hero 飘浮光球 */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            will-change: transform;
+        }
+
+        /* Editorial Engine Stage */
+        .editorial-stage {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            cursor: default;
+            user-select: none;
+        }
+
+        .editorial-line {
+            position: absolute;
+            white-space: pre;
+            color: #a1a1aa;
+            transition: color 120ms ease;
+        }
+
+        .editorial-line:hover {
+            color: #a3e635;
+        }
+
+        .editorial-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: auto;
+            cursor: grab;
+            z-index: 10;
+            will-change: transform, left, top;
+        }
+
+        .editorial-orb:active {
+            cursor: grabbing;
+        }
+
+        .editorial-hint {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.6);
+            color: rgba(255, 255, 255, 0.55);
+            font: 400 11px/1.2 "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        @media (max-width: 760px) {
+            .editorial-stage {
+                height: 380px;
+            }
+            .editorial-hint {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -594,6 +689,10 @@
     <!-- Hero Section -->
     <section class="h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
         <div class="hero-bg absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1a1a1a_0%,#000_100%)]"></div>
+        <div class="hero-orb" id="hero-orb-1"></div>
+        <div class="hero-orb" id="hero-orb-2"></div>
+        <div class="hero-orb" id="hero-orb-3"></div>
+        <div class="hero-orb" id="hero-orb-4"></div>
 
         <div data-aos="zoom-out" data-aos-duration="2000" class="relative z-10 mb-10">
             <img src="./doc/img/icons/icon.png" alt="FPlayer Logo"
@@ -604,7 +703,7 @@
             data-aos="fade-up">
             FPlayer
         </h1>
-        <p class="relative z-10 text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl font-light" data-aos="fade-up"
+        <p id="hero-subtitle" class="relative z-10 text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl font-light" data-aos="fade-up"
             data-aos-delay="200">
             面向局域网的三端协同流媒体系统。<br>
             <span class="text-white">Desktop 采集推流，Service 编排分发，Mobile 轻量播放。</span><br>
@@ -1076,20 +1175,10 @@
                     </div>
                 </div>
             </div>
-            <div class="code-block bg-zinc-950 p-10 rounded-[32px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)]"
+            <div class="code-block bg-zinc-950 rounded-[32px] border border-white/5 shadow-[0_0_100px_rgba(0,0,0,1)] overflow-hidden"
                 data-aos="flip-left">
-                <pre class="text-xs text-green-500/80 font-mono leading-loose">
-<span class="text-white">// 三端协同架构</span>
-desktop (capture / push)
-  ↓
-service (gateway + zlm kernel)
-  ↓
-mobile (hls / http-flv / rtmp play)
-  ↓
-runtime.json / resolve api
-  ↓
-cross-platform release pipeline
-                </pre>
+                <div id="editorial-stage" class="editorial-stage"></div>
+                <p class="editorial-hint">拖拽光球 · 文字实时绕排 · 零 DOM 测量</p>
             </div>
         </div>
     </section>
@@ -1305,6 +1394,575 @@ cross-platform release pipeline
             if (e.key === 'ArrowLeft' && lightbox.classList.contains('is-open')) showPrevImage();
             if (e.key === 'ArrowRight' && lightbox.classList.contains('is-open')) showNextImage();
         });
+    </script>
+    <script type="module">
+        import { prepareWithSegments, measureLineStats, layout as pretextLayout, layoutNextLine, walkLineRanges } from '@chenglou/pretext';
+
+        (function () {
+            'use strict';
+
+            const FONT_FAMILY = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+
+            // =========================================================
+            // 工具函数
+            // =========================================================
+            function measureWidth(text, fontSpec) {
+                const prepared = prepareWithSegments(text, fontSpec);
+                const { maxLineWidth } = measureLineStats(prepared, 2000);
+                return maxLineWidth;
+            }
+
+            function measureBlock(text, fontSpec, maxWidth, lineHeight) {
+                const prepared = prepareWithSegments(text, fontSpec);
+                return pretextLayout(prepared, maxWidth, lineHeight);
+            }
+
+            // =========================================================
+            // 1. Hero 飘浮光球
+            // =========================================================
+            function initHeroOrbs() {
+                const orbEls = [1, 2, 3, 4]
+                    .map(n => document.getElementById('hero-orb-' + n))
+                    .filter(Boolean);
+
+                if (orbEls.length === 0) return;
+
+                const colors = [
+                    'radial-gradient(circle at 35% 35%, rgba(163,230,53,0.2), rgba(163,230,53,0.04) 55%, transparent 72%)',
+                    'radial-gradient(circle at 35% 35%, rgba(0,113,227,0.18), rgba(0,113,227,0.04) 55%, transparent 72%)',
+                    'radial-gradient(circle at 35% 35%, rgba(168,85,247,0.16), rgba(168,85,247,0.03) 55%, transparent 72%)',
+                    'radial-gradient(circle at 35% 35%, rgba(251,146,60,0.16), rgba(251,146,60,0.03) 55%, transparent 72%)',
+                ];
+                const sizes = [320, 220, 280, 190];
+                const shadows = [
+                    '0 0 100px 30px rgba(163,230,53,0.12), 0 0 200px 60px rgba(163,230,53,0.04)',
+                    '0 0 100px 30px rgba(0,113,227,0.1), 0 0 200px 60px rgba(0,113,227,0.03)',
+                    '0 0 100px 30px rgba(168,85,247,0.1), 0 0 200px 60px rgba(168,85,247,0.03)',
+                    '0 0 100px 30px rgba(251,146,60,0.09), 0 0 200px 60px rgba(251,146,60,0.03)',
+                ];
+
+                const state = orbEls.map((el, i) => {
+                    el.style.background = colors[i];
+                    el.style.width = sizes[i] + 'px';
+                    el.style.height = sizes[i] + 'px';
+                    el.style.boxShadow = shadows[i];
+                    const hero = document.querySelector('.h-screen');
+                    const rect = hero ? hero.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight };
+                    const x = rect.width * (0.2 + Math.random() * 0.6);
+                    const y = rect.height * (0.2 + Math.random() * 0.6);
+                    el.style.transform = `translate(${x - sizes[i] / 2}px, ${y - sizes[i] / 2}px)`;
+                    el.style.opacity = '0.5';
+                    return {
+                        el, x, y,
+                        vx: (Math.random() - 0.5) * 18,
+                        vy: (Math.random() - 0.5) * 12,
+                        size: sizes[i],
+                    };
+                });
+
+                let lastTime = performance.now();
+                function tick(now) {
+                    const dt = Math.min((now - lastTime) / 1000, 0.1);
+                    lastTime = now;
+                    const hero = document.querySelector('.h-screen');
+                    const w = hero ? hero.clientWidth : window.innerWidth;
+                    const h = hero ? hero.clientHeight : window.innerHeight;
+
+                    for (let i = 0; i < state.length; i++) {
+                        const s = state[i];
+                        s.x += s.vx * dt;
+                        s.y += s.vy * dt;
+                        const r = s.size / 2;
+                        const margin = r * 0.6;
+                        if (s.x - r < -margin) { s.x = -margin + r; s.vx = Math.abs(s.vx); }
+                        if (s.x + r > w + margin) { s.x = w + margin - r; s.vx = -Math.abs(s.vx); }
+                        if (s.y - r < -margin) { s.y = -margin + r; s.vy = Math.abs(s.vy); }
+                        if (s.y + r > h + margin) { s.y = h + margin - r; s.vy = -Math.abs(s.vy); }
+                        s.el.style.transform = `translate(${s.x - r}px, ${s.y - r}px)`;
+                    }
+                    requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            // =========================================================
+            // 2. Hero 副标题自适应 shrinkwrap
+            // =========================================================
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            function updateHeroSubtitle() {
+                if (!heroSubtitle) return;
+                const isDesktop = window.innerWidth >= 768;
+                const mainSize = isDesktop ? 24 : 20;
+                const smallSize = 16;
+
+                const lines = [
+                    { text: '面向局域网的三端协同流媒体系统。', weight: '300', size: mainSize },
+                    { text: 'Desktop 采集推流，Service 编排分发，Mobile 轻量播放。', weight: '300', size: mainSize },
+                    { text: 'Service 部署至公网服务器，即可升级为网络直播系统。', weight: '500', size: smallSize },
+                ];
+
+                const widths = lines.map(l =>
+                    measureWidth(l.text, `${l.weight} ${l.size}px ${FONT_FAMILY}`)
+                );
+                const natural = Math.ceil(Math.max(...widths) + 24);
+                const capped = Math.min(natural, isDesktop ? 768 : window.innerWidth - 48);
+                heroSubtitle.style.maxWidth = capped + 'px';
+            }
+            if (heroSubtitle) {
+                updateHeroSubtitle();
+                window.addEventListener('resize', updateHeroSubtitle);
+            }
+
+            // =========================================================
+            // 3. 卡片背面文字 shrinkwrap
+            // =========================================================
+            function applyCardShrinkwrap() {
+                document.querySelectorAll('.card-back p').forEach(p => {
+                    const text = p.textContent.trim();
+                    if (text.length < 10) return;
+                    const contentW = p.parentElement.clientWidth - 80;
+                    if (contentW < 100) return;
+                    const font = getComputedStyle(p).font || `400 16px ${FONT_FAMILY}`;
+                    const { maxLineWidth } = measureLineStats(prepareWithSegments(text, font), contentW);
+                    const tightWidth = Math.ceil(maxLineWidth + 4);
+                    if (tightWidth > 60 && tightWidth < contentW) {
+                        p.style.maxWidth = tightWidth + 'px';
+                        p.style.marginLeft = 'auto';
+                        p.style.marginRight = 'auto';
+                    }
+                });
+            }
+
+            // =========================================================
+            // 4. Editorial Engine — 技术架构区文字绕排光球
+            // =========================================================
+            function initEditorialEngine() {
+                const stage = document.getElementById('editorial-stage');
+                if (!stage) return;
+
+                const BODY_TEXT = `FPlayer 的三端协同架构是一个精心设计的流媒体系统。Desktop 端基于 C++17 与 Qt 6.10，集成 FFmpeg 进行多源采集与组合推流，支持屏幕、摄像头及视频文件等多输入源灵活编排。Service 端内置 ZLMediaKit 内核与 gateway 会话网关，通过 resolve API 与 runtime.json 动态信息统一输出可播放地址，彻底消除手工拼接 URL 的繁琐。Mobile 端基于 Flutter 构建，支持 HLS、HTTP-FLV 与 RTMP 三大协议，以极低的接入成本提供跨平台播放体验。三端通过统一的流地址模型联动，从采集到播放形成完整闭环。当 Service 部署至公网服务器时，系统即可突破局域网限制，升级为网络直播系统。Desktop 还集成 AI 多模态视觉分析能力，支持 OpenAI 兼容 API，可接入智谱 GLM-4v、通义千问 Qwen-VL 等主流视觉模型，对流媒体截图进行智能识别与分析，流式逐字呈现结果。整个系统采用分层解耦设计，App、Widget、Service、Runtime、Backend、API 六层清晰分离，确保每一层可独立开发、测试与演进。从工业监控的毫秒级响应到医疗影像的高保真流转，从智慧教育的跨校区直播到国产化办公环境的统一部署，FPlayer 覆盖了流媒体应用的全场景版图。这套架构的设计哲学是让复杂的事情在框架层解决，让使用者只需关注业务本身。`;
+
+                const BODY_FONT = `400 15px/26px ${FONT_FAMILY}`;
+                const LINE_HEIGHT = 26;
+                const H_PAD = 16;
+                const V_PAD = 6;
+                const MIN_SLOT = 40;
+
+                // 光球定义
+                const orbDefs = [
+                    { r: 55, vx: 22, vy: 14, color: [163, 230, 53] },
+                    { r: 45, vx: -18, vy: 24, color: [0, 113, 227] },
+                    { r: 50, vx: 15, vy: -19, color: [168, 85, 247] },
+                ];
+
+                // 创建光球 DOM
+                const orbDoms = orbDefs.map(def => {
+                    const el = document.createElement('div');
+                    el.className = 'editorial-orb';
+                    const [rr, gg, bb] = def.color;
+                    el.style.background = `radial-gradient(circle at 35% 35%, rgba(${rr},${gg},${bb},0.3), rgba(${rr},${gg},${bb},0.08) 55%, transparent 72%)`;
+                    el.style.boxShadow = `0 0 50px 12px rgba(${rr},${gg},${bb},0.15), 0 0 100px 30px rgba(${rr},${gg},${bb},0.05)`;
+                    stage.appendChild(el);
+                    return el;
+                });
+
+                // 文字行池
+                const linePool = [];
+                function syncLinePool(count) {
+                    while (linePool.length < count) {
+                        const span = document.createElement('span');
+                        span.className = 'editorial-line';
+                        span.style.font = BODY_FONT;
+                        span.style.lineHeight = LINE_HEIGHT + 'px';
+                        stage.appendChild(span);
+                        linePool.push(span);
+                    }
+                    for (let i = 0; i < linePool.length; i++) {
+                        linePool[i].style.display = i < count ? '' : 'none';
+                    }
+                }
+
+                // 准备文本
+                let preparedBody;
+                try {
+                    preparedBody = prepareWithSegments(BODY_TEXT, BODY_FONT);
+                } catch (e) {
+                    console.warn('[pretext] editorial engine: prepareWithSegments failed', e);
+                    return;
+                }
+
+                // 光球物理状态
+                const stageW = stage.clientWidth;
+                const stageH = stage.clientHeight;
+                const orbs = orbDefs.map(def => ({
+                    x: stageW * (0.2 + Math.random() * 0.6),
+                    y: stageH * (0.2 + Math.random() * 0.6),
+                    r: def.r,
+                    vx: def.vx,
+                    vy: def.vy,
+                    paused: false,
+                }));
+
+                // 指针交互
+                let pointer = { x: -9999, y: -9999 };
+                let drag = null; // { orbIndex, startPointerX, startPointerY, startOrbX, startOrbY }
+
+                function hitTestOrb(px, py) {
+                    for (let i = orbs.length - 1; i >= 0; i--) {
+                        const o = orbs[i];
+                        const dx = px - o.x, dy = py - o.y;
+                        if (dx * dx + dy * dy <= o.r * o.r) return i;
+                    }
+                    return -1;
+                }
+
+                // 计算一行中光球阻挡的区间
+                function orbInterval(o, bandTop, bandBottom) {
+                    const top = bandTop - V_PAD, bottom = bandBottom + V_PAD;
+                    if (top >= o.y + o.r || bottom <= o.y - o.r) return null;
+                    const minDy = o.y >= top && o.y <= bottom ? 0 : o.y < top ? top - o.y : o.y - bottom;
+                    if (minDy >= o.r) return null;
+                    const maxDx = Math.sqrt(o.r * o.r - minDy * minDy);
+                    return { left: o.x - maxDx - H_PAD, right: o.x + maxDx + H_PAD };
+                }
+
+                // 从可用区间中挖掉障碍物
+                function carveSlots(base, blocked) {
+                    let slots = [base];
+                    for (const b of blocked) {
+                        const next = [];
+                        for (const s of slots) {
+                            if (b.right <= s.left || b.left >= s.right) {
+                                next.push(s);
+                            } else {
+                                if (b.left > s.left) next.push({ left: s.left, right: b.left });
+                                if (b.right < s.right) next.push({ left: b.right, right: s.right });
+                            }
+                        }
+                        slots = next;
+                    }
+                    return slots.filter(s => s.right - s.left >= MIN_SLOT);
+                }
+
+                function layoutFrame() {
+                    const W = stage.clientWidth;
+                    const H = stage.clientHeight;
+                    const paddingX = 20;
+                    const paddingY = 16;
+                    const contentW = W - paddingX * 2;
+                    const contentH = H - paddingY * 2;
+
+                    const blocked = [];
+                    for (let i = 0; i < orbs.length; i++) {
+                        const o = orbs[i];
+                        const interval = orbInterval(o, paddingY, paddingY + contentH);
+                        if (interval) blocked.push(interval);
+                    }
+
+                    const slots = carveSlots({ left: paddingX, right: paddingX + contentW }, blocked);
+
+                    // 用每个 slot 排版文字
+                    const allLines = [];
+                    let cursor = { segmentIndex: 0, graphemeIndex: 0 };
+                    let textExhausted = false;
+
+                    // 简单逐行排版：在整个可用高度内逐行排
+                    let lineY = paddingY;
+                    while (lineY + LINE_HEIGHT <= paddingY + contentH && !textExhausted) {
+                        const bandTop = lineY;
+                        const bandBottom = lineY + LINE_HEIGHT;
+
+                        const bandBlocked = [];
+                        for (const o of orbs) {
+                            const iv = orbInterval(o, bandTop, bandBottom);
+                            if (iv) bandBlocked.push(iv);
+                        }
+
+                        const bandSlots = carveSlots({ left: paddingX, right: paddingX + contentW }, bandBlocked);
+                        // 选最宽的 slot
+                        const best = bandSlots.reduce((a, b) => (b.right - b.left) > (a.right - a.left) ? b : a, { left: 0, right: 0 });
+
+                        if (best.right - best.left < MIN_SLOT) {
+                            lineY += LINE_HEIGHT;
+                            continue;
+                        }
+
+                        const line = layoutNextLine(preparedBody, cursor, best.right - best.left);
+                        if (!line) { textExhausted = true; break; }
+
+                        allLines.push({
+                            x: Math.round(best.left),
+                            y: Math.round(lineY),
+                            text: line.text,
+                        });
+                        cursor = line.end;
+                        lineY += LINE_HEIGHT;
+                    }
+
+                    // 同步 DOM
+                    syncLinePool(allLines.length);
+                    for (let i = 0; i < allLines.length; i++) {
+                        const el = linePool[i];
+                        const l = allLines[i];
+                        el.style.left = l.x + 'px';
+                        el.style.top = l.y + 'px';
+                        if (el.textContent !== l.text) el.textContent = l.text;
+                    }
+
+                    // 同步光球 DOM
+                    for (let i = 0; i < orbs.length; i++) {
+                        const o = orbs[i];
+                        const el = orbDoms[i];
+                        el.style.left = (o.x - o.r) + 'px';
+                        el.style.top = (o.y - o.r) + 'px';
+                        el.style.width = (o.r * 2) + 'px';
+                        el.style.height = (o.r * 2) + 'px';
+                        el.style.opacity = o.paused ? '0.4' : '0.85';
+                    }
+                }
+
+                let lastTime = performance.now();
+                let scheduledRaf = null;
+
+                function tick(now) {
+                    scheduledRaf = null;
+                    const dt = Math.min((now - lastTime) / 1000, 0.05);
+                    lastTime = now;
+
+                    const W = stage.clientWidth;
+                    const H = stage.clientHeight;
+                    let stillAnimating = false;
+
+                    // 光球物理更新
+                    for (let i = 0; i < orbs.length; i++) {
+                        const o = orbs[i];
+                        if (o.paused || (drag && drag.orbIndex === i)) continue;
+                        stillAnimating = true;
+                        o.x += o.vx * dt;
+                        o.y += o.vy * dt;
+                        if (o.x - o.r < 0) { o.x = o.r; o.vx = Math.abs(o.vx); }
+                        if (o.x + o.r > W) { o.x = W - o.r; o.vx = -Math.abs(o.vx); }
+                        if (o.y - o.r < 0) { o.y = o.r; o.vy = Math.abs(o.vy); }
+                        if (o.y + o.r > H) { o.y = H - o.r; o.vy = -Math.abs(o.vy); }
+                    }
+
+                    // 光球碰撞
+                    for (let i = 0; i < orbs.length; i++) {
+                        for (let j = i + 1; j < orbs.length; j++) {
+                            const a = orbs[i], b = orbs[j];
+                            const dx = b.x - a.x, dy = b.y - a.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            const minDist = a.r + b.r + 16;
+                            if (dist < minDist && dist > 0.1) {
+                                const force = (minDist - dist) * 0.5;
+                                const nx = dx / dist, ny = dy / dist;
+                                if (!a.paused && (!drag || drag.orbIndex !== i)) { a.vx -= nx * force * dt; a.vy -= ny * force * dt; }
+                                if (!b.paused && (!drag || drag.orbIndex !== j)) { b.vx += nx * force * dt; b.vy += ny * force * dt; }
+                            }
+                        }
+                    }
+
+                    layoutFrame();
+
+                    if (stillAnimating) {
+                        scheduledRaf = requestAnimationFrame(tick);
+                    } else {
+                        lastTime = performance.now();
+                    }
+                }
+
+                function ensureRunning() {
+                    if (scheduledRaf === null) {
+                        lastTime = performance.now();
+                        scheduledRaf = requestAnimationFrame(tick);
+                    }
+                }
+
+                // 指针事件
+                stage.addEventListener('pointerdown', e => {
+                    const rect = stage.getBoundingClientRect();
+                    const px = e.clientX - rect.left;
+                    const py = e.clientY - rect.top;
+                    const hit = hitTestOrb(px, py);
+                    if (hit !== -1) {
+                        e.preventDefault();
+                        drag = {
+                            orbIndex: hit,
+                            startPointerX: px,
+                            startPointerY: py,
+                            startOrbX: orbs[hit].x,
+                            startOrbY: orbs[hit].y,
+                        };
+                        stage.setPointerCapture(e.pointerId);
+                    }
+                });
+
+                stage.addEventListener('pointermove', e => {
+                    const rect = stage.getBoundingClientRect();
+                    pointer.x = e.clientX - rect.left;
+                    pointer.y = e.clientY - rect.top;
+
+                    if (drag) {
+                        const o = orbs[drag.orbIndex];
+                        o.x = drag.startOrbX + (pointer.x - drag.startPointerX);
+                        o.y = drag.startOrbY + (pointer.y - drag.startPointerY);
+                        o.x = Math.max(o.r, Math.min(stage.clientWidth - o.r, o.x));
+                        o.y = Math.max(o.r, Math.min(stage.clientHeight - o.r, o.y));
+                        ensureRunning();
+                    } else {
+                        const hit = hitTestOrb(pointer.x, pointer.y);
+                        stage.style.cursor = hit !== -1 ? 'grab' : 'default';
+                    }
+                });
+
+                const onPointerUp = e => {
+                    if (drag) {
+                        const dx = pointer.x - drag.startPointerX;
+                        const dy = pointer.y - drag.startPointerY;
+                        if (dx * dx + dy * dy < 9) {
+                            // 点击切换暂停
+                            orbs[drag.orbIndex].paused = !orbs[drag.orbIndex].paused;
+                            ensureRunning();
+                        }
+                        drag = null;
+                        stage.style.cursor = 'default';
+                    }
+                };
+
+                stage.addEventListener('pointerup', onPointerUp);
+                stage.addEventListener('pointercancel', onPointerUp);
+
+                // Resize
+                window.addEventListener('resize', () => {
+                    syncLinePool(0); // 强制重排
+                    ensureRunning();
+                });
+
+                // 初始渲染
+                layoutFrame();
+                ensureRunning();
+            }
+
+            // =========================================================
+            // 5. 全局 h2 自适应标题字号
+            // =========================================================
+            function fitHeadlines() {
+                const isDesktop = window.innerWidth >= 768;
+                document.querySelectorAll('h2').forEach(h2 => {
+                    const text = h2.textContent.replace(/\s+/g, ' ').trim();
+                    if (text.length < 3 || text.length > 120) return;
+
+                    const container = h2.parentElement;
+                    if (!container) return;
+                    const containerW = container.clientWidth - 32;
+                    if (containerW < 200) return;
+
+                    // 二分搜索最大字号
+                    const loSize = isDesktop ? 28 : 22;
+                    const hiSize = isDesktop ? 96 : 56;
+                    let best = loSize;
+                    const style = getComputedStyle(h2);
+                    const fontWeight = style.fontWeight || '700';
+
+                    // 先用当前字号快速判断
+                    const currentSize = parseFloat(style.fontSize);
+                    const currentW = measureWidth(text, `${fontWeight} ${currentSize}px ${FONT_FAMILY}`);
+
+                    if (currentW <= containerW && currentSize >= hiSize * 0.9) return; // 已经很大了，跳过
+
+                    // 二分搜索
+                    let lo = loSize;
+                    let hi = hiSize;
+                    while (lo <= hi) {
+                        const mid = Math.floor((lo + hi) / 2);
+                        const w = measureWidth(text, `${fontWeight} ${mid}px ${FONT_FAMILY}`);
+                        if (w <= containerW) {
+                            best = mid;
+                            lo = mid + 1;
+                        } else {
+                            hi = mid - 1;
+                        }
+                    }
+
+                    // 不覆盖已有内联样式中的 font-size
+                    if (!h2.style.fontSize || h2.style.fontSize === '') {
+                        // 只有当差值超过 15% 才调整，避免频繁微调
+                        const ratio = best / currentSize;
+                        if (ratio > 1.15 || ratio < 0.85) {
+                            h2.style.fontSize = best + 'px';
+                            h2.style.transition = 'font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                        }
+                    }
+                });
+
+                // 同时处理 h1
+                document.querySelectorAll('h1').forEach(h1 => {
+                    const text = h1.textContent.replace(/\s+/g, ' ').trim();
+                    if (text.length < 1 || text.length > 60) return;
+                    const container = h1.closest('.max-w-7xl, .max-w-6xl, .max-w-4xl, section') || h1.parentElement;
+                    const containerW = (container ? container.clientWidth : window.innerWidth) - 48;
+                    if (containerW < 200) return;
+
+                    const style = getComputedStyle(h1);
+                    const fontWeight = style.fontWeight || '800';
+                    const currentSize = parseFloat(style.fontSize);
+
+                    let lo = isDesktop ? 36 : 24;
+                    let hi = isDesktop ? 144 : 72;
+                    let best = lo;
+
+                    while (lo <= hi) {
+                        const mid = Math.floor((lo + hi) / 2);
+                        const w = measureWidth(text, `${fontWeight} ${mid}px ${FONT_FAMILY}`);
+                        // h1 允许占容器宽度的 95%
+                        if (w <= containerW * 0.95) {
+                            best = mid;
+                            lo = mid + 1;
+                        } else {
+                            hi = mid - 1;
+                        }
+                    }
+
+                    if (!h1.style.fontSize || h1.style.fontSize === '') {
+                        const ratio = best / currentSize;
+                        if (ratio > 1.15 || ratio < 0.85) {
+                            h1.style.fontSize = best + 'px';
+                            h1.style.transition = 'font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                        }
+                    }
+                });
+            }
+
+            // =========================================================
+            // 启动
+            // =========================================================
+            initHeroOrbs();
+            if (heroSubtitle) updateHeroSubtitle();
+            setTimeout(() => {
+                applyCardShrinkwrap();
+                fitHeadlines();
+            }, 500);
+            setTimeout(applyCardShrinkwrap, 1200);
+            window.addEventListener('resize', () => {
+                if (heroSubtitle) updateHeroSubtitle();
+                setTimeout(applyCardShrinkwrap, 200);
+                setTimeout(fitHeadlines, 300);
+            });
+            document.fonts.ready.then(() => {
+                if (heroSubtitle) updateHeroSubtitle();
+                applyCardShrinkwrap();
+                fitHeadlines();
+            });
+
+            // 初始化 Editorial Engine（等 DOM 就绪）
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initEditorialEngine, { once: true });
+            } else {
+                initEditorialEngine();
+            }
+
+            console.log('[pretext] 全站文字动效引擎已就绪 — Hero光球 + Shrinkwrap + EditorialEngine + 自适应标题');
+        })();
     </script>
 </body>
 
