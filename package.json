@@ -1,5 +1,9 @@
 {
+  "scripts": {
+    "start": "serve -s . -p 5003"
+  },
   "dependencies": {
-    "@chenglou/pretext": "^0.0.6"
+    "@chenglou/pretext": "^0.0.6",
+    "serve": "^14.2.6"
   }
 }
